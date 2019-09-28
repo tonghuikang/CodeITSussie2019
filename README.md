@@ -13,44 +13,51 @@ As per the instruction you have to implement a post endpoint /square
 
 # Your workflow
 
+### Setting up
+
+Clone this repo
+```
+git clone https://github.com/tonghuikang/codeITSussie2019
+```
+
+Use my password and username to log in.
+```
+heroku login
+```
+
+Generate SSH keys
+```
+ssh-keygen -t rsa
+heroku keys:add ~/.ssh/id_rsa.pub
+```
+
+Set up your remote server
+```
+git remote -v
+git remote add heroku git@heroku.com:ryan-cs.git
+```
+
+### Deploying your solution
+
 After you have edited and saved
 
 ```
 git add <files you have edited and SAVED>
 git commit -m "say something"
+git push heroku master
 ```
-
-
 
 Push to your Heroku, with:
 
 ```
-git push jon master
+git push heroku master
 ```
-or
-```
-git push ryan master
-```
-
-or 
-
-```
-git push huikang master
-```
-
 
 
 # Notes from Hui Kang
 
 (Do not run this unless you know what are you doing)
 
-To set heroku
-
-```
-git remote -v
-git remote rm heroku
-git remote add heroku git@heroku.com:<app created on Heroku>.git
-```
 
 To deploy to heroku
 
@@ -67,12 +74,16 @@ git checkout -b <your name>
 git push --set-upstream origin huikang
 ```
 
-To commit and push (do not push to master)
+DO NOT PUSH TO MASTER !!!
 
 ```
 git add <only the files you want to add>
 git commit -m "say something"
 ```
+
+### Windows installation notes
+
+Download the installer https://devcenter.heroku.com/articles/heroku-cli
 
 
 
