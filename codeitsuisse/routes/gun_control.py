@@ -55,27 +55,28 @@ def execution(request):
     #knapsack problem in DP (kill me now)
     num_endpoints = len(endpoints)
     knapsack = set()
-    def rabbithole(n,fuel):
+    def rabbithole(n,fuel,bag):
         value = endpoints[n-1][2]
         if n == 0 or fuel == 0:
-            result = 0
-        elif fuel - value < 0:
-            result = rabbithole(n-1, fuel)
+            result = (0,bag)
+        elif value > fuel:
+            result = rabbithole(n-1, fuel,bag)
         else:
-            temp1 = value + rabbithole(n-1, fuel-value)
-            temp2 = rabbithole(n-1, fuel)
-            if temp1 > temp2:
-                knapsack.add(n-1)
-                result = temp1
+            temp1 = bag + [n]
+            # result = max(value+rabbithole(n-1,fuel-value,temp1),rabbithole(n-1,fuel,bag))
+            number1, tempbag1 = rabbithole(n-1,fuel-value,temp1)
+            number1 += value
+            number2, tempbag2 = rabbithole(n-1,fuel,bag)
+            if number1 > number2:
+                result = (number1, tempbag1)
             else:
-                result = temp2
-
+                result = (number2, tempbag2)
         return result
     hits = []
-    rabbithole(num_endpoints,fuel)
+    maxnumber, knapsack = rabbithole(num_endpoints,fuel, [])
     for item in knapsack:
         gun = dict()
-        endpoint = endpoints[item]
+        endpoint = endpoints[item-1]
         gun['cell'] = {'x':endpoint[1]+1,'y':endpoint[0]+1}
         gun['guns'] = endpoint[2]
         hits.append(gun)
