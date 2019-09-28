@@ -1,5 +1,6 @@
 import logging
 import json
+import random
 
 
 from flask import request, jsonify;
@@ -14,8 +15,10 @@ def lottery():
     print(data)
     #logging.info("data sent for evaluation {}".format(data))
 
-    guess_array = [10,9,8,7,6,5,4,3,2,1]
-    # guess_array = np.random.randint(1, 101, 10)
+    guess_array = []
+    for i in range(10):
+        elem = random.randint(1, 100)
+        guess_array.append(elem)
     print(guess_array)
 
     #inputValue = data.get("input")
