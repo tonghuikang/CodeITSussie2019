@@ -105,6 +105,7 @@ def opti(name, obj, prz, rsk, capital, risk, vartype):
 
     m = Model()
     m = Model(sense=MAXIMIZE, solver_name="cbc")
+    m.verbose = False 
 
     # name = ["a","b","c","d"]
     # obj = [30,25,15,20]
@@ -128,7 +129,7 @@ def opti(name, obj, prz, rsk, capital, risk, vartype):
     print(status)
     print(m.objective_value)
     res = [(v.name, int(v.x)) for v in m.vars]
-    print(res)
+    # print(res)
 
     tickers = []
     for entry in res:
