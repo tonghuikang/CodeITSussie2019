@@ -8,7 +8,7 @@ from flask import request, jsonify;
 from codeitsuisse import app;
 
 import sys # Library for INT_MAX 
-from collections import Counter
+from collections import Counter, defaultdict
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +29,7 @@ def typing_contest():
             adj[i][j] = distance.hamming(keys[i], keys[j])
      
     print(adj)
+    print(keys)
     # build adj matrix
 
     g = Graph(len(keys)) 
@@ -38,11 +39,43 @@ def typing_contest():
 
     res = {}
     res["cost"] = len(data[0]) + len(data) - 1 + sum([e[2] for e in mst])
+    
+    d = defaultdict(list)
+    visited = [0 for _ in range(len(keys))]
 
     print(mst)
-    print(res)
-    return json.dumps(res)
+    for m in mst:
+        d[m[0]].append(m[1])
+        d[m[1]].append(m[0])
+    
+    steps = []
+    steps.append({"type" : "INPUT", "value" : keys[0]})
+    
+            
+    stack = [(0,i) for i in d[0]]
+    while not all(visited):
+        new_stack = []
+        for node in stack:
+            print(stack)
+            steps.append({"type": 'COPY', "value": keys[node[0]]})
+            steps.append({"type": 'TRANSFORM', "value": keys[node[1]]})
+            visited[node[0]] = 1
+            if not visited[node[1]]:
+                visited[node[1]] = 1
+                arr = []
+                for nod in d[node[1]]:
+                    if not visited[nod]:
+                        new_stack.append((node[1],nod))
+        stack = new_stack
+        print(new_stack, "\n\n")
 
+    for k,v in counter.items():
+        for _ in range(v-1):
+            steps.append({"type": 'COPY', "value": k})
+
+    print(steps)
+    res["steps"] = steps
+    return jsonify(res)
 
     
 class Graph(): 
