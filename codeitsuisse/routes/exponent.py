@@ -21,4 +21,7 @@ def exponent():
     first_digit = int(10 ** (exponent%1) // 1)
     num_digits = int((exponent // 1) + 1)
 
-    return json.dumps({"result" : [first_digit, num_digits, last_digit]})
+    res = {"result" : [first_digit, num_digits, last_digit]}
+    print(res)
+
+    return json.dumps(res)
