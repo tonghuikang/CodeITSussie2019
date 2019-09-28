@@ -14,12 +14,28 @@ def sentiment():
     reviews = data.get("reviews")
 
     response = []
+    bad_words = [
+        "I made a big mistake going to see this film",
+        "apparently Bernard Cribbins ad libbed nearly all",
+        "To call this film a disaster will be an understatement",
+        "What a horrible movie.",
+        "Writer-director Emilio Estevez shows a definite lack of talent",
+        "I saw the film yesterday and stopped it at half time",
+        "I hate a movie that doesn't have an ending",
+        "director is totally a self-absorbed guy full",
+        "I never thought a movie could make me regret the fact that I subscribe to the HBO service",
+        "A blind person could have shot this movie better",
+        "worst film",
+        "worst movies",
+        "cliche everyone in the living room"
+    ]
     for review in reviews:
-        if 'disaster' in review or 'worst' in review or 'I made a big mistake going to see this film' in review:
+        if any(ext in review for ext in bad_words):
             response.append("negative")
         else:
             response.append("positive")
             
     result = {}
     result["response"] = response
+    print(result)
     return jsonify(result)
