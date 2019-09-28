@@ -17,19 +17,19 @@ def typing_contest():
     data = request.get_json()
 
     counter = Counter(data)
-    print(counter)
-    print(counter.keys())
+    # print(counter)
+    # print(counter.keys())
     keys = list(counter.keys())
-    print(keys)
-    print("\n\n\n")
+    # print(keys)
+    # print("\n\n\n")
 
     adj = [[0 for _ in range(len(keys))] for _ in range(len(keys))]
     for i in range(len(keys)):
         for j in range(len(keys)):
             adj[i][j] = distance.hamming(keys[i], keys[j])
      
-    print(adj)
-    print(keys)
+    # print(adj)
+    # print(keys)
     # build adj matrix
 
     g = Graph(len(keys)) 
@@ -43,7 +43,7 @@ def typing_contest():
     d = defaultdict(list)
     visited = [0 for _ in range(len(keys))]
 
-    print(mst)
+    # print(mst)
     for m in mst:
         d[m[0]].append(m[1])
         d[m[1]].append(m[0])
@@ -56,7 +56,7 @@ def typing_contest():
     while not all(visited):
         new_stack = []
         for node in stack:
-            print(stack)
+            # print(stack)
             steps.append({"type": 'COPY', "value": keys[node[0]]})
             steps.append({"type": 'TRANSFORM', "value": keys[node[1]]})
             visited[node[0]] = 1
@@ -67,7 +67,7 @@ def typing_contest():
                     if not visited[nod]:
                         new_stack.append((node[1],nod))
         stack = new_stack
-        print(new_stack, "\n\n")
+        # print(new_stack, "\n\n")
 
     for k,v in counter.items():
         for _ in range(v-1):
@@ -136,21 +136,21 @@ class Graph():
                         key[v] = self.graph[u][v] 
                         parent[v] = u 
   
-        self.printMST(parent)
+        # self.printMST(parent)
         return [(parent[i], i, self.graph[i][parent[i]]) for i in range(1, self.V)]
   
 
     # A utility function to print the constructed MST stored in parent[] 
-    def printMST(self, parent): 
-        print("Edge \tWeight")
-        for i in range(1, self.V): 
-            print(parent[i], "-", i, "\t", self.graph[i][ parent[i] ])
+#     def printMST(self, parent): 
+#         print("Edge \tWeight")
+#         for i in range(1, self.V): 
+#             print(parent[i], "-", i, "\t", self.graph[i][ parent[i] ])
   
 
-g = Graph(5) 
-g.graph = [ [0, 2, 0, 6, 0], 
-            [2, 0, 3, 8, 5], 
-            [0, 3, 0, 0, 7], 
-            [6, 8, 0, 0, 9], 
-            [0, 5, 7, 9, 0]]
-g.primMST()
+# g = Graph(5) 
+# g.graph = [ [0, 2, 0, 6, 0], 
+#             [2, 0, 3, 8, 5], 
+#             [0, 3, 0, 0, 7], 
+#             [6, 8, 0, 0, 9], 
+#             [0, 5, 7, 9, 0]]
+# g.primMST()
