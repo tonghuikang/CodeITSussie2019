@@ -51,7 +51,9 @@ def typing_contest():
     steps = []
     steps.append({"type" : "INPUT", "value" : keys[0]})
     
-            
+    print(len(adj))
+    print(len(data))
+
     stack = [(0,i) for i in d[0]]
     while not all(visited):
         new_stack = []
@@ -73,7 +75,7 @@ def typing_contest():
         for _ in range(v-1):
             steps.append({"type": 'COPY', "value": k})
 
-    print(steps)
+    # print(steps)
     res["steps"] = steps
     return jsonify(res)
 
