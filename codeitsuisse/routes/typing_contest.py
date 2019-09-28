@@ -40,6 +40,7 @@ def typing_contest():
     res["cost"] = len(data[0]) + len(data) - 1 + sum([e[2] for e in mst])
 
     print(mst)
+    print(res)
     return json.dumps(res)
 
 
