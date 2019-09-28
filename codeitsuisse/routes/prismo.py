@@ -48,7 +48,6 @@ def prismo(request):
                 if square == 0:
                     goal_index = (i,j)
                     break
-        print(pos_index, goal_index)
         directions = [(1,0),(0,1),(-1,0),(0,-1)]
         while pos_index != goal_index:
             opp_square = goal[pos_index[0]][pos_index[1]]
