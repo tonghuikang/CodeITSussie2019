@@ -59,12 +59,10 @@ def execution(request):
         value = endpoints[n-1][2]
         if n == 0 or fuel == 0:
             result = 0
-        elif value > fuel:
+        elif fuel - value < 0:
             result = rabbithole(n-1, fuel)
         else:
-            temp1 = 0
-            if fuel - value >= 0:
-                temp1 = value + rabbithole(n-1, fuel-value)
+            temp1 = value + rabbithole(n-1, fuel-value)
             temp2 = rabbithole(n-1, fuel)
             if temp1 > temp2:
                 knapsack.add(n-1)
