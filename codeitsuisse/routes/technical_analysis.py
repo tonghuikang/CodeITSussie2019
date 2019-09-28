@@ -10,7 +10,7 @@ import numpy, scipy.optimize
 
 logger = logging.getLogger(__name__)
 
-@app.route('/technical_analysis', methods=['POST'])
+@app.route('/technical-analysis', methods=['POST'])
 def technical_analysis():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
