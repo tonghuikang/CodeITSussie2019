@@ -16,7 +16,7 @@ def exponent():
     n = data["n"]
     p = data["p"]
     print(n,p)
-    last_digit = n**(p%10)%10
+    last_digit = (n%10)**(p%20)%10
     exponent = p * math.log10(n)
     first_digit = int(10 ** (exponent%1) // 1)
     num_digits = int((exponent // 1) + 1)
@@ -24,4 +24,4 @@ def exponent():
     res = {"result" : [first_digit, num_digits, last_digit]}
     print(res)
 
-    return json.dumps(res), 200, {'Content-Type': 'application/json; charset=utf-8'}
+    return jsonify(res)
