@@ -9,7 +9,7 @@ from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
 
-@app.route('/lottery', methods=['POST','GET'])
+@app.route('/lottery', methods=['GET'])
 def lottery():
     data = request.get_json()
     print(data)
