@@ -28,10 +28,10 @@ git remote add heroku git@heroku.com:<app created on Heroku>.git
 To deploy to heroku
 
 ```
+git add <only the files you want to add>
+git commit -m "say something"
 git push heroku master
 ```
-
-
 
 To create new branch 
 
@@ -40,12 +40,15 @@ git checkout -b <your name>
 git push --set-upstream origin huikang
 ```
 
+
+
+DO NOT PUSH TO MASTER UNLESS APPROVED
+
 To commit and push
 
 ```
 git add <only the files you want to add>
 git commit -m "say something"
-git push
 ```
 
 
