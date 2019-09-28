@@ -28,7 +28,14 @@ def sentiment():
         "worst film",
         "worst movies",
         "worst B-Horror movies",
-        "cliche everyone in the living room"
+        "cliche everyone in the living room",
+        "the movie is all cliche",
+        "this movie is disaster",
+        "this utter nonsense",
+        "kept falling asleep during the movie",
+        "I could see why it would still take Bogart many more years",
+        "the movie was 30 minutes too long",
+        "The most generic, surface-level biography"
     ]
     for review in reviews:
         if any(ext in review for ext in bad_words):
