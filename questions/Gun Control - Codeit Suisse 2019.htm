@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gun Control - Codeit Suisse 2019</title>
+  <script src="https://codeitsuisse2019.gitlab.io/markdown-helper/markdown-helper.js"></script>
+</head>
+<body>
+<zero-md class="markdown-page">
+    <template>
+        <xmp>
+# Gun Control
+
+There is a Gun Tunnel in the form of a grid shown below with white void passages and grey blocked walls. Each passage through the tunnel has machine guns installed at the dead end. The entrance is always at the top left corner of the grid (x=1, y=1). The number of guns at each dead end is equal to the distance from the entrance (number of cells to traverse to reach the end). There are no passages looping back and there are no dead ends reachable by more than one path.
+
+
+Your mission is to program and send unmanned ground vehicles (UGV) which can move only forward and not backward to the dead ends and destroy the guns. You have unlimited number of UGVs. However, you have limited units of fuel for the UGVs. For every unit of fuel, a UGV can traverse only one void cell. Your program has to identify the passages that you want the UGVs to traverse and destroy maximum number of guns using the limited fuel. Each UGV starts from the entrance of the tunnel.
+
+## Requirement
+
+End-point to be exposed is <team-url>/gun-control
+
+## Input
+
+grid: Grid as an array of string. Letter O represents void (not to be confused with digit 0) and letter X represents blocked
+
+fuel: Units of fuel available
+
+### Example
+
+```json
+{ 
+  "grid":[ 
+    "OOXXOO",
+    "XOOOOX",
+    "XOXXOX",
+    "OOXOOO",
+    "OXOOXO"
+  ],
+  "fuel":15
+}
+```
+#### Representation
+
+![Gun Control Example Image](image.png)
+
+## Output
+
+### Example
+
+```json
+{
+  "hits": [
+    {
+      "cell": {
+        "x": 1,
+        "y": 5
+      },
+      "guns": 7
+    },
+    {
+      "cell": {
+        "x": 6,
+        "y": 1
+      },
+      "guns": 8
+    }
+  ]
+}
+```
+
+## Limits
+
+Timeout: 30 seconds
+
+1 * 1 <= Grid size <= 100 * 100
+
+1 <= Number of units of fuel <= 100,000
+
+        </xmp>
+    </template>
+
+</zero-md>
+</body>
+</html>

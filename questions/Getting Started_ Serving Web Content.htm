@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://reverse-lottery.herokuapp.com/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Getting Started: Serving Web Content</title>
+    
+    <style>
+        .centered-content {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 10px;
+        }
+    </style>
+<style>@media print {#ghostery-purple-box {display:none !important}}</style></head>
+<body class="centered-wrapper">
+<div class="centered-content">
+    <h1 id="reverse-lottery">Reverse Lottery</h1>
+    <p>A reverse lottery is a lottery where a set of 10 winning numbers will be predetermined at the start of every hour. The aim of each team will be to guess the set of winning numbers.</p>
+    <p>Possible numbers ranges from 1 to 100 inclusive.</p>
+    <p>Guesses that are closer to the set of winning numbers will be given a higher score, with the exact guess getting maximum score.</p>
+    <p>The numbers can be assumed to be arranged in a circular manner like the numbers on a clock for points calculation. Meaning the numbers next to 100, are 99 and 1. For example, if the answer is [100, 100, 100, 100, 100, 100, 100, 100, 100, 100] A guess of [1, 1, 1, ... , 1] will give a higher score than a guess of [98, 98, 98, ... , 98].</p>
+    <p>Also, the order of the numbers matters. For example, if the answer is [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] A guess of [100, 90, 80, 70, 60, 50, 40, 30, 20, 10] will not suffice.</p>
+    <p>The biggest source of motivation are your thoughts, so think big and motivate yourself to win.</p>
+    <p>When you feel like quitting, think about why you started.</p>
+    <p>The Bearer is the key to authentication.</p>
+    <p>Nothing is impossible, the word itself says I'm Possible!</p>
+    <p>Plan your guesses wisely, and may the odds be ever in your favour.</p>
+    <h2 id="sample-input">Sample Input</h2>
+    <pre class="sourceCode json"><code class="sourceCode json">[<span class="er">x</span><span class="dv">1</span>, <span class="er">x</span><span class="dv">2</span>, <span class="er">x</span><span class="dv">3</span>, <span class="er">x</span><span class="dv">4</span>, <span class="er">x</span><span class="dv">5</span>, <span class="er">x</span><span class="dv">6</span>, <span class="er">x</span><span class="dv">7</span>, <span class="er">x</span><span class="dv">8</span>, <span class="er">x</span><span class="dv">9</span>, <span class="er">x</span><span class="dv">10</span>] <span class="er">where</span> <span class="er">x1,</span> <span class="er">x2,</span> <span class="er">x3,</span> <span class="er">...</span> <span class="er">,</span> <span class="er">x10</span> <span class="er">are</span> <span class="er">numbers</span> <span class="er">between</span> <span class="er">1</span> <span class="er">to</span> <span class="er">100</span> <span class="er">inclusive.</span></code></pre>
+    <h2 id="sample-output">Sample Output</h2>
+    <pre class="sourceCode json"><code class="sourceCode json"><span class="er">Double</span> <span class="er">0</span> <span class="er">to</span> <span class="er">100</span> <span class="er">where</span> <span class="er">100</span> <span class="er">is</span> <span class="er">the</span> <span class="er">max</span> <span class="er">score.</span></code></pre>
+    <h2 id="requirements">Requirements</h2>
+    <p>Expose 1 POST endpoint.</p>
+</div>
+
+
+</body></html>

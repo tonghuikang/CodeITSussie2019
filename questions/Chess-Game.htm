@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chess-Game</title>
+</head>
+<body>
+<h1>Calculate number of positions a Queen can attack on a chessboard</h1>
+<hr />
+<p>You will be given a square chess board with one queen and a number of obstacles placed on it. Determine maximum number of squares the queen can attack in all the possible moves.</p>
+<h2>Requirements</h2>
+<ul>
+<li>Expose a POST method with endpoint <code>/chessgame</code></li>
+<li>Return integer result as json</li>
+</ul>
+<h2>Constraints</h2>
+<ul>
+<li>Input will be JSON object with Queen (K) and obstacle (X) positions specified in an array.</li>
+<li>n is an integer specifying square shaped chessboard size. 1 &lt;= n &lt;= 200</li>
+</ul>
+<h2>Input description</h2>
+<p>A queen is standing on n * n chessboard. The chess board's rows are numbered from 1 to n, going from bottom to top. Its columns are numbered from 1 to n, going from left to right.</p>
+<p>The HTTP POST request will come with a body of Content-Type: application/json</p>
+<h3>Sample input JSON</h3>
+<p>In below example, 5 is the chessboard size and 3 obstacles are present on it. Queen is standing at square (1,2) and obstacles are present at (3,1), (3,2) and (4,3)</p>
+<pre class="codehilite"><code>    [
+      [
+        &quot;&quot;,&quot;K&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;
+      ],
+      [
+        &quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;
+      ],
+      [
+        &quot;X&quot;,&quot;X&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;
+      ],
+      [
+        &quot;&quot;,&quot;&quot;,&quot;X&quot;,&quot;&quot;,&quot;&quot;
+      ],
+      [
+        &quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;
+      ] 
+    ]</code></pre>
+
+
+<h3>Sample output</h3>
+<p>Number of squares where Queen can attack is 9.</p>
+<pre class="codehilite"><code>9</code></pre>
+</body>
+</html>

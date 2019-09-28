@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Typing Contest</title>
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./stylesheets/style.css">
+<style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+</style>
+</head>
+<body>
+<article class="markdown-body">
+<h1 id="typing-contest">Typing Contest</h1>
+<hr>
+<p>Felicity has just signed up for a typing contest. A special text editor is used in this typing contest and the 
+contestants compete on their skill in using the editor rather than time. The text editor has very limited capabilities. 
+It supports only three operations:</p>
+<ul>
+<li>INPUT: input a line of text at the beginning of the text file. This operation can be used exactly once for the 
+first line. The cost of this operation is the length of the line.</li>
+<li>COPY: copy any existing line in the text file and append it to the end of the file. The operation can be used 
+unlimited number of times. The cost of this function is 1.</li>
+<li>TRANSFORM: change the last line of the text file to any text. This operation can only be used once per line. 
+This operation has a cost that is the hamming distance between the original line and the altered line.  </li>
+</ul>
+<p>The definition of hamming distance according to Wikipedia is as follows:</p>
+<blockquote>
+<p>The Hamming distance between two strings of equal length is the number of positions at which the corresponding 
+symbols are different. In other words, it measures the minimum number of substitutions required to change one 
+string into the other. </p>
+</blockquote>
+<p>Example:
+The hamming distance between <strong>a</strong>b<strong>c</strong>d <strong>c</strong>b<strong>a</strong>d is 2 due to the two different characters in bold.</p>
+<p>Felicity is given <em>N</em> lines to type in the contest using the special text editor. To win the contest, she needs to use 
+the lowest possible cost to type out all the required lines. The ordering of the lines in the resulting file does not 
+matter as long as all the required lines are present in the file. To help Felicity achieve this, you need to calculate 
+the minimum cost of operations and the respective steps to generate all those lines in the file. There can be multiple 
+ways to achieve the same minimum cost, and all of them will be accepted as correct answers.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Expose a POST method with endpoint <code>/typing-contest</code> where the input will be in the body in json format.</li>
+<li>Return the result as json</li>
+</ul>
+<h2 id="sample-input">Sample input</h2>
+<pre><code>[ &quot;laziest&quot;,
+  &quot;busiest&quot;,
+  &quot;easiest&quot; ]</code></pre><h2 id="sample-output">Sample output</h2>
+<pre><code>{
+  &quot;cost&quot;: 13,
+  &quot;steps&quot;: [ { type: &#39;INPUT&#39;, value: &#39;laziest&#39; },
+             { type: &#39;COPY&#39;, value: &#39;laziest&#39; },
+             { type: &#39;TRANSFORM&#39;, value: &#39;easiest&#39; },
+             { type: &#39;COPY&#39;, value: &#39;easiest&#39; },
+             { type: &#39;TRANSFORM&#39;, value: &#39;busiest&#39; } ]
+}</code></pre><p>Explanation:</p>
+<ul>
+<li>INPUT laziest in line 1 (cost: 7)</li>
+<li>COPY laziest from line 1 to line 2 (cost: 1)</li>
+<li>TRANSFORM laziest to easiest in line 2 (cost: 2)</li>
+<li>COPY easiest from line 2 (cost: 1)</li>
+<li>TRANSFORM easiest to busiest from line 2 to line 3 (cost: 2)</li>
+</ul>
+<h2 id="constraints">Constraints</h2>
+<ul>
+<li>All lines have the same length in each input set</li>
+<li>1 &#8804; <em>N</em> &#8804; 1000</li>
+</ul>
+
+</article>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./instructions/stylesheets/style.css">
+</head>
+
+<body>
+<div id="wrapper">
+    <h1 id="sorting">Yin Yang</h1>
+    <h4 id="description">Background</h4>
+    <p> Unbeknownst to most mortals, our world exists and thrives only because of the presence of cosmically generated Yin and Yang elements which powers its core.<br><br>
+        While most physics teachers will have you believe that the Earth spins and revolves around the Sun because of some ridiculous concept like Gravity, in reality, the Gods release an arbitrary number of Yin and Yang elements into the atmosphere which are captured by the Guardian of the Earth,
+        Sage Ryan, who then uses his Qi to release these elements into the core. However, the balance of these elements is incredibly important, if one kind of the elements exceeds the other by even a slight amount, the world would collapse. (Dinosaurs found this out the hard way when Sage Ryan partied a bit too hard one night.)<br>
+
+    <h4 id="problem">Problem</h4>
+
+    Every morning, Sage Ryan's ancient machine, "Element Altar" absorbs some elements from the atmosphere.<br>
+        Then, depending on the current balance of elements inside the core, Sage Ryan operates the Altar and picks the elements of the desired kind and releases them to the Earth's core.<br><br>
+        However, there are some strange, divinely ordained rules which Sage Ryan must obey while operating the Altar and hence making this elements release work incredibly arduous:<br><br>
+    <ul>
+        <li>Once <b><i>n</i></b> elements of Yin (displayed as 'y') or Yang (displayed as 'Y') are absorbed, they will form a single row on the Elements altar. e.g. "yYyyY" -> [yin, Yang, yin, yin, Yang]
+        </li>
+        <li>Elements Altar then provides an integer <b><i>k</i></b> which is the number of elements Ryan must pick today.
+        </li>
+        <li>For each picking process <b><i>i</i></b> where 1 &le; <b><i>i</i></b> &le; <b><i>k</i></b>
+            <ol>
+                <li>Elements Altar will generate (uniformly and independently) a random integer <b><i>x</i></b> between 1 and <b><i>n</i></b> -
+                    <b><i>i</i></b> + 1 (inclusive)
+                </li>
+                <li>Elements Altar will then let Ryan pick the <b><i>x</i></b><sup>th</sup> element <b>either from the left or right end of the row</b>, which will then reduce the number of elements in the row by one.
+                </li>
+            </ol>
+        </li>
+</ul>
+
+    Suddenly, one day in the middle of the Yin season, the sky became dimmer, the weather became colder. Sage Ryan realized that the number of Yin elements in the core had catastrophically increased. <br>
+    Therefore, starting from today, <b>he needs to release as many Yang elements as he possibly can</b> to the Earth's core until this seasonal Yin crisis is resolved.<br>
+    <br>
+
+    However, before the picking process can commence, for every combination of elements, Sage Ryan needs to know roughly how much Qi he would need to accumulate.<br>
+    Unfortunately, Sage Ryan was not a very disciplined student and slept through most of his Statistics classes. Therefore, he is hiring you to calculate the <b>expected number of Yang elements </b> he will release given that he always makes the most optimal choice of picking elements which would maximise the total number of Yang elements picked after k steps.<br>
+
+    <br>
+    <b>Hint 1</b>: Ryan's goal is to maximise the total number of Yang elements released to the core and hence, sometimes he would need to pick a Yin element (rather than Yang) and throw it away if he thinks it would give him a higher probability to pick more Yang elements later on.
+     Therefore, while designing a solution, always picking a Yang element may not be the most accurate strategy.<br>
+    <b>Hint 2</b>: Look at <a href="https://en.wikipedia.org/wiki/Expected_value">Expected Value</a>
+
+    </p>
+
+    <h4 id="endpoint">Endpoint</h4>
+    <p>Provide a
+        <code>POST</code> endpoint
+        <code>/yin-yang</code> that given 1 set of input will return 1 set of output</p>
+    <h4 id="input">Input</h4>
+    <p>The
+        <code>HTTP POST</code> request will come with a body of
+        <code>Content-Type: application/json</code> .</p>
+    <pre>{
+    "number_of_elements" : <b><i>n</i></b>,
+    "number_of_operations" : <b><i>k</i></b>,
+    "elements" :  <b><i>E</i></b>,
+}</pre>
+
+    <h4 id="output">Output</h4>
+    <p>The expected
+        <code>HTTP</code> response will come with a body of
+        <code>Content-Type: application/json</code>
+        containing</p>
+    <pre>{
+    result : (The expected number of Yang elements picked)
+}</pre>
+
+    <h4>Constraints</h4>
+    <ul>
+        <li>
+            1 &le; <b><i>k</i></b> &le; <b><i>n</i></b> &le; 30
+        </li>
+        <li>
+            HTTP Request Timeout: 5 seconds
+        </li>
+
+    </ul>
+
+
+
+
+    <h4 id="Explanation">Examples</h4>
+    <p>Sample Input 1</p>
+    <pre>{
+    "number_of_elements" : 3,
+    "number_of_operations" : 1,
+    "elements" :  "yYY"
+}</pre>
+    <p>Sample Output 1</p>
+    <pre>1.0000000000</pre>
+    <p>Explanation 1</p>
+    <img src="./instructions/images/Eg1_1.PNG"/>
+
+    <p>Independent of <b><i>x</i></b>, a Yang element will always be picked by Ryan, so, the expected number of Yang elements chosen after the <b><i>k</i></b> = 1 operation is 1. Since Ryan is only required to do one operation, the answer to this problem is 1.</p>
+
+    <p>Sample Input 2</p>
+    <pre>{
+    "number_of_elements" : 4,
+    "number_of_operations" : 2,
+    "elements" :  "YyYy"
+}</pre>
+    <p>Sample Output 2</p>
+    <pre>1.5000000000</pre>
+    <p>Explanation 2</p>
+    <img src="./instructions/images/Eg2_1.PNG"/>
+
+    <p>Independent of <b><i>x</i></b>, a Yang element will always be picked by Ryan, so, the expected number of Yang elements chosen after the <b><i>k</i></b> = 1 operation is 1.</p>
+
+    <p> For the second operation, there are two possible orderings of Yin and Yang elements (depending on which Yang element was picked in the first operation):</p>
+
+    <img src="./instructions/images/Eg2_2.PNG"/>
+
+    <p>In the first possible elements ordering, the probability of picking a Yang Element is &frac13;. In the second possible elements ordering, the probability of picking a Yang element is &frac23;. This means the expected number of Yang elements chosen in the second operation is &frac12; * &frac13; + &frac12; * &frac23; = &frac12;.
+        After performing both the operations, the total expected number of Yang elements is 1 + &frac12; = 1.5.</p>
+
+
+</div>
+</body>
+
+</html>

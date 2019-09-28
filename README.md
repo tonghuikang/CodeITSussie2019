@@ -11,6 +11,33 @@ As per the instruction you have to implement a post endpoint /square
 
 
 
+# Your workflow
+
+After you have edited and saved
+
+```
+git add <files you have edited and SAVED>
+git commit -m "say something"
+```
+
+
+
+Push to your Heroku, with:
+
+```
+git push jon master
+```
+or
+```
+git push ryan master
+```
+
+or 
+
+```
+git push huikang master
+```
+
 
 
 # Notes from Hui Kang
@@ -21,7 +48,7 @@ To set heroku
 
 ```
 git remote -v
-git remote rm origin
+git remote rm heroku
 git remote add heroku git@heroku.com:<app created on Heroku>.git
 ```
 
@@ -40,15 +67,12 @@ git checkout -b <your name>
 git push --set-upstream origin huikang
 ```
 
-
-
-DO NOT PUSH TO MASTER UNLESS APPROVED
-
-To commit and push
+To commit and push (do not push to master)
 
 ```
 git add <only the files you want to add>
 git commit -m "say something"
 ```
+
 
 

@@ -1,0 +1,73 @@
+
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../public/stylesheets/style.css">
+<style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+</style>
+<article class="markdown-body">
+<h1 id="ready-player-one">Ready Player One</h1>
+<hr>
+<p>There are 2 Jars.
+Jar 1 is filled with N number of balls labelled with numbers from 1,2,3...N and
+Jar 2 is empty.</p>
+<p>T is the target the player needs to achieve.</p>
+<p>Two players take turns playing this game of choosing balls from Jar 1 to put into Jar 2.
+The player who puts a ball from Jar1 to Jar2 when the sum of the numbers on all balls in Jar 2
+equals or crosses the target (T) will win the game.</p>
+<p>The aim of this problem is to return if it is possible for Player1 to win the game assuming both players play their best.
+If yes, then return maximum number of moves it can take for player 1 to force a win, else -1.</p>
+<h2 id="the-game-example-playthrough">The Game Example Playthrough</h2>
+<p>Value of N (maxChoosableInteger) =5 and value of T (desiredTotal) =10
+Which means 1,2,3,4,5 balls are available in Jar 1 and target for both the players is to reach or cross the target 10.</p>
+<p>Player1 will always start the game followed by Player2.</p>
+<p>Let&#39;s say :- <br/>
+Player1 selected ball number 5 from Jar 1 and put it in Jar 2. <br/>
+Player2 selected ball number 1 from Jar 1 and put it in Jar 2. <br/>
+Player1 selected ball number 4 from Jar 1 and put it in Jar 2. <br/></p>
+<p>Now the total number in Jar2 reached 10 and the last person who picked the ball from Jar 1 to Jar 2 was Player1 so in this case Player1 won the game.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Expose a POST method with endpoint <code>/readyplayerone</code></li>
+<li>Return minimum number of moves or -1 as json</li>
+</ul>
+<h2 id="constraints">Constraints</h2>
+<p>  N&lt;=20, T&lt;=200</p>
+<h2 id="input-description">Input description</h2>
+<p>The HTTP POST request will come with a body of Content-Type: application/json</p>
+<h2 id="examples">Examples</h2>
+<p><strong>Input</strong>: N=10,T=15<br/>
+<strong>Output</strong>: 3 <br/>
+<strong>Explanation</strong>: If player1 chooses 4, then no matter what player2 chooses player1 
+will win in the next move. Thus player1 can force a win in 3 moves. eg. 4,1,10 ;
+4,2,9; 4,3,8 ...</p>
+<p><strong>Input</strong>: N=6,T=12 <br/>
+<strong>Output</strong>: 3 <br/>
+<strong>Explanation</strong>: If player1 chooses 6, then no matter what player2 chooses player1 
+will win in the next move. Thus player1 can force a win in 3 moves. eg. 6,1,5 ;
+6,2,4; 6,3,4 ...</p>
+<p><strong>Input</strong>: N=5,T=11 <br/>
+<strong>Output</strong>: -1 <br/>
+<strong>Explanation</strong>: No matter what player1 chooses in the first move, player2 can force
+a win. eg. 5,1,2,3 ; 4,2,1,5 ; 3,2,1,5 ; 2,3,1,5; 2,3,5,4; 1,4,2,5 ...</p>
+<h3 id="sample-input-json">Sample input JSON</h3>
+<pre><code>{
+    &quot;maxChoosableInteger&quot;: 10,
+    &quot;desiredTotal&quot;: 15
+}</code></pre><h3 id="sample-output-json">Sample output JSON</h3>
+<pre><code>{
+  &quot;res&quot; : 3
+}
+</code></pre>
+</article>

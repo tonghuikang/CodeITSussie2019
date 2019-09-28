@@ -1,0 +1,198 @@
+
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../public/stylesheets/style.css">
+<style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+</style>
+<article class="markdown-body">
+<h1 id="portfolio-risk-management">Portfolio Risk Management</h1>
+<hr>
+<p><strong>1. a.</strong> Given a list of stocks <strong>(maximum one share of any stock)</strong>, create the most optimised investment portfolios for your clients</p>
+<p><strong>1. b.</strong> Given a list of stocks <strong>(with at least one share of each stock)</strong>, create the most optimised investment portfolios for your clients. If the starting capital is not enough to buy at least one of each stock, there cannot be any profits.</p>
+<p><strong>1. c.</strong> Given a list of stocks <strong>(any number of share of any stocks)</strong>, create the most optimised investment portfolios for your clients</p>
+<p><strong>2.</strong> Given a list of stocks <strong>(maximum one share of any stock)</strong>, create the most optimised investment portfolios for your clients with risk contraints. <strong>Total risk must not exceed the client risk appetite</strong></p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li><p>Expose the following POST endpoints : </p>
+<ul>
+<li><code>/maximize_1a</code></li>
+<li><code>/maximize_1b</code></li>
+<li><code>/maximize_1c</code></li>
+<li><code>/maximize_2</code></li>
+</ul>
+</li>
+<li><p>Return the results as JSON</p>
+</li>
+</ul>
+<h2 id="constraints">Constraints</h2>
+<ul>
+<li>30 second timeout</li>
+</ul>
+<h2 id="input-and-output-description">Input and Output Description</h2>
+<p>The HTTP POST request will come with a body of <code>Content-Type: application/json</code>
+<br></p>
+<hr>
+<h2 id="1-a">1. a</h2>
+<hr>
+<h4 id="sample-input-json">Sample Input JSON</h4>
+<p>Stock has a ticker of type string, expectedProfit of type int, sharePrice of type int</p>
+<pre><code>{
+        &quot;startingCapital&quot;: 400,
+        &quot;stocks&quot;: [
+            [
+                &quot;Sony&quot;, //ticker of type string
+                30, //expected profit of type int
+                400  //share price of type int
+            ],
+            [
+                &quot;Dell&quot;,
+                20,
+                300
+            ],
+            [
+                &quot;Disney&quot;,
+                15,
+                100
+            ],
+            [
+                &quot;Apple&quot;,
+                20,
+                100
+            ]
+        ]
+    }</code></pre><h4 id="sample-output-json">Sample output JSON</h4>
+<pre><code>{
+        &quot;profit&quot;: 40,
+        &quot;portfolio&quot;: [
+            &quot;Apple&quot;, &quot;Dell&quot;  //ticker of the stocks, in any order
+        ]
+}</code></pre><br>
+
+<hr>
+<h2 id="1-b">1. b</h2>
+<hr>
+<h4 id="sample-input-json">Sample Input JSON</h4>
+<p>Stock has a ticker of type string, expectedProfit of type int, sharePrice of type int</p>
+<pre><code>{
+        &quot;startingCapital&quot;: 1300,
+        &quot;stocks&quot;: [
+            [
+                &quot;Sony&quot;, //ticker of type string
+                30, //expected profit of type int
+                400  //share price of type int
+            ],
+            [
+                &quot;Dell&quot;,
+                20,
+                300
+            ],
+            [
+                &quot;Disney&quot;,
+                15,
+                100
+            ],
+            [
+                &quot;Apple&quot;,
+                20,
+                100
+            ]
+        ]
+    }</code></pre><h4 id="sample-output-json">Sample output JSON</h4>
+<pre><code>{
+        &quot;profit&quot;: 165,
+        &quot;portfolio&quot;: [
+            &quot;Apple&quot;, &quot;Apple&quot;, &quot;Apple&quot;, &quot;Apple&quot;, &quot;Dell&quot;, &quot;Sony&quot;, &quot;Disney&quot;  //ticker of the stocks, in any order
+        ]
+}</code></pre><br>
+
+<hr>
+<h2 id="1-c">1. c</h2>
+<hr>
+<h4 id="sample-input-json">Sample Input JSON</h4>
+<p>Stock has a ticker of type string, expectedProfit of type int, sharePrice of type int</p>
+<pre><code>{
+        &quot;startingCapital&quot;: 400,
+        &quot;stocks&quot;: [
+            [
+                &quot;Sony&quot;, //ticker of type string
+                30, //expected profit of type int
+                400  //share price of type int
+            ],
+            [
+                &quot;Dell&quot;,
+                20,
+                300
+            ],
+            [
+                &quot;Disney&quot;,
+                15,
+                100
+            ],
+            [
+                &quot;Apple&quot;,
+                20,
+                100
+            ]
+        ]
+    }</code></pre><h4 id="sample-output-json">Sample output JSON</h4>
+<pre><code>{
+        &quot;profit&quot;: 80,
+        &quot;portfolio&quot;: [
+            &quot;Apple&quot;, &quot;Apple&quot;, &quot;Apple&quot;, &quot;Apple&quot;  //ticker of the stocks, in any order
+        ]
+}</code></pre><br>
+
+<hr>
+<h2 id="2">2</h2>
+<hr>
+<h4 id="sample-input-json">Sample Input JSON</h4>
+<p>Stock has a ticker of type string, expectedProfit of type int, sharePrice of type int</p>
+<pre><code>{
+        &quot;startingCapital&quot;: 400,
+        &quot;risk&quot;: 10,     //maximum risk capacity
+        &quot;stocks&quot;: [
+            [
+                &quot;Sony&quot;, //ticker of type string
+                30, //expected profit of type int
+                400,  //share price of type int
+                5   //level of risk
+            ],
+            [
+                &quot;Dell&quot;,
+                25,
+                300,
+                2
+            ],
+            [
+                &quot;Disney&quot;,
+                15,
+                50,
+                4
+            ],
+            [
+                &quot;Apple&quot;,
+                20,
+                100,
+                6
+            ]
+        ]
+    }</code></pre><h4 id="sample-output-json">Sample output JSON</h4>
+<pre><code>{
+        &quot;profit&quot;: 55,
+        &quot;portfolio&quot;: [
+            &quot;Disney&quot;, &quot;Disney&quot;, &quot;Dell&quot;  //ticker of the stocks, in any order
+        ]
+}</code></pre>
+</article>
