@@ -129,7 +129,7 @@ def opti(name, obj, prz, rsk, capital, risk, vartype):
     print(status)
     print(m.objective_value)
     res = [(v.name, int(v.x)) for v in m.vars]
-    # print(res)
+    print(res)
 
     tickers = []
     for entry in res:
@@ -137,4 +137,4 @@ def opti(name, obj, prz, rsk, capital, risk, vartype):
             tickers.append(entry[0])
 
 
-    return int(m.objective_value), res, tickers
+    return abs(int(m.objective_value)), res, tickers
