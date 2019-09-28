@@ -27,6 +27,7 @@ def sentiment():
         "A blind person could have shot this movie better",
         "worst film",
         "worst movies",
+        "worst B-Horror movies",
         "cliche everyone in the living room"
     ]
     for review in reviews:
