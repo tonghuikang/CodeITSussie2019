@@ -1,5 +1,12 @@
-import logging
+import sys
+import os
+import tempfile
+from flask import escape
+from flask import jsonify
+from collections import Counter
+import requests
 import json
+from flask import Response
 
 from flask import request, jsonify;
 
@@ -73,7 +80,6 @@ def gun_control(request):
         gun['guns'] = endpoint[2]
         hits.append(gun)
 
-    print(hits)
     result = {}
     result['hits'] = hits
     return jsonify(result)
