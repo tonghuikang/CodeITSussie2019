@@ -37,15 +37,15 @@ def optimise_case(arr_in):
         guess_freq = abs(ff[numpy.argmax(Fyy[1:])+1])   # excluding the zero frequency "peak", which is related to offset
         guess_amp = numpy.std(yy) * 2.**0.5
         guess_offset = numpy.mean(yy)
-        guess = numpy.array([guess_amp, 2.*numpy.pi*guess_freq, 0., guess_offset])
+        guess = numpy.array([guess_amp, 2.*numpy.pi*guess_freq, 0., 0., guess_offset])
 
-        def sinfunc(t, A, w, p, c):  return A * numpy.sin(w*t + p) + c
+        def sinfunc(t, A, w, p, k, c):  return A * numpy.sin(w*t + p) + k*t + c
         popt, pcov = scipy.optimize.curve_fit(sinfunc, tt, yy, p0=guess)
-        A, w, p, c = popt
+        A, w, p, k, c = popt
         f = w/(2.*numpy.pi)
-        fitfunc = lambda t: A * numpy.sin(w*t + p) + c
+        fitfunc = lambda t: A * numpy.sin(w*t + p) + k*t + c
         return {"amp": A, "omega": w, "phase": p, "offset": c, "freq": f, "period": 1./f, "fitfunc": fitfunc, "maxcov": numpy.max(pcov), "rawres": (guess,popt,pcov)}
-
+    
     larger_range = 1099
 
     yy = arr_in
