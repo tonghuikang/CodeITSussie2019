@@ -39,13 +39,16 @@ def prismo(request):
         x_length = len(initial)
         y_length = len(initial[0])
         for i, row in enumerate(initial):
-            if 0 in row:
-                pos_index = (i, row.index(0))
-                break
+            for j, square in enumerate(row):
+                if square == 0:
+                    pos_index = (i,j)
+                    break
         for i, row in enumerate(goal):
-            if 0 in row:
-                goal_index = (i, row.index(0))
-
+            for j, square in enumerate(row):
+                if square == 0:
+                    goal_index = (i,j)
+                    break
+        print(pos_index, goal_index)
         directions = [(1,0),(0,1),(-1,0),(0,-1)]
         while pos_index != goal_index:
             opp_square = goal[pos_index[0]][pos_index[1]]
