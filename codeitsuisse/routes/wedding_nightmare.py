@@ -99,18 +99,15 @@ def nightmare(request):
 
         disjoint_sets[0] = disjoint_sets[0].union(remaining)
 
-        print(disjoint_sets)
         allocation = []
         for num, table in enumerate(disjoint_sets):
             for person in table:
                 allocation.append([person,num+1])
-        print(allocation)
         res = {"test_case": test_case_num, 'satisfiable': True, 'allocation': allocation}
         response.append(res)
-    print(response)
 
     # return json.dumps(response)
-    return Response(json.dumps(response), mimetype='application/json')
+    return jsonify(response)
 
 
 @app.route('/wedding-nightmare', methods=['POST'])
