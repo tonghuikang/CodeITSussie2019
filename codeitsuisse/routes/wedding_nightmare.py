@@ -101,5 +101,5 @@ def wedding_nightmare(request):
 
     # print(response)
     # return json.dumps(response)
-    return Response(json.dumps(response), mimetype='application/json')
+    return Response(json.dumps(response))
     # return jsonify(response)
