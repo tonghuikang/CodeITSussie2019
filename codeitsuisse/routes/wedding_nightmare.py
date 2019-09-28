@@ -19,7 +19,6 @@ def wedding_nightmare(request):
         friends = test_case['friends']
         enemies = (test_case['enemies'])
         families = test_case['families']
-        print('test case:', test_case_num)
 
         #create an enemies dictionary for )
         enemies_dict = {}
@@ -93,14 +92,11 @@ def wedding_nightmare(request):
 
         disjoint_sets[0] = disjoint_sets[0].union(remaining)
 
-        print(disjoint_sets)
         allocation = []
         for num, table in enumerate(disjoint_sets):
             for person in table:
                 allocation.append([person,num+1])
-        print(allocation)
         res = {"test_case": test_case_num, 'satisfiable': True, 'allocation': allocation}
         response.append(res)
-    print(response)
 
     return json.dumps(response)
