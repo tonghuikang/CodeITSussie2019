@@ -14,12 +14,18 @@ def dependency_manager():
     print(data)
     logging.info("data sent for evaluation {}".format(data))
 
+    modules = {}
+    for i,m in enumerate(data["modules"]):
+        modules[m] = i
+
     g = Graph(len(data["modules"]))
     print("\n\n")
     print(data["dependencyPairs"])
     print(data["modules"])
+
     for element in data["dependencyPairs"]:
-        g.addEdge(element["dependee"], element["dependentOn"])
+        g.addEdge(modules[element["dependee"]], 
+                  modules[element["dependentOn"]])
     res = g.topoSort()
     if res == -1:
         return json.dumps([])
