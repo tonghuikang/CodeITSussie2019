@@ -19,6 +19,7 @@ def dependency_manager():
         modules[m] = i
 
     g = Graph(len(data["modules"]))
+
     print("\n\n")
     print(data["dependencyPairs"])
     print(data["modules"])
@@ -26,19 +27,22 @@ def dependency_manager():
     for element in data["dependencyPairs"]:
         g.addEdge(modules[element["dependee"]], 
                   modules[element["dependentOn"]])
-    res = g.topoSort()
-    if res == -1:
-        return json.dumps([])
-    else:
+    res,cyclic = g.topoSort()
 
-        return json.dumps([data["modules"][r] for r in res])
+    result = []
+    for r in res:
+        if cyclic[r]:
+            result.append(data["modules"][r])
+    
+    return json.dumps(result[::-1])
 
   
 #Class to represent a graph 
 class Graph: 
     def __init__(self,vertices): 
         self.graph = defaultdict(list) #dictionary containing adjacency List 
-        self.V = vertices #No. of vertices 
+        self.V = vertices #No. of vertices
+        self.cyclic = [True for _ in range(vertices)]
   
     # function to add an edge to graph 
     def addEdge(self,u,v): 
@@ -56,6 +60,7 @@ class Graph:
             # return to the starting point, graph is cyclic
             # no topo sort is possible
             if i == start:
+                self.cyclic[i] = False
                 return -1
 
             if visited[i] == False: 
@@ -64,6 +69,7 @@ class Graph:
 
                 # propogate the result out
                 if res == -1:
+                    self.cyclic[i] = False
                     return -1
   
         # Push current vertex to stack which stores result 
@@ -74,15 +80,15 @@ class Graph:
     def topoSort(self): 
         # Mark all the vertices as not visited 
         visited = [False]*self.V 
-        stack = [] 
+        stack = []
   
         # Call the recursive helper function to store Topological 
         # Sort starting from all vertices one by one 
-        for i in range(self.V): 
+        for i in range(self.V):
             if visited[i] == False:
                 res = self.topoSortUtil(i,i,visited,stack)
                 if res == -1:
-                    return -1
-  
+                    self.cyclic[i] = False
+
         # Print contents of the stack 
-        return stack 
+        return stack, self.cyclic

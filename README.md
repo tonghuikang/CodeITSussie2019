@@ -37,6 +37,11 @@ git remote -v
 git remote add heroku git@heroku.com:ryan-cs.git
 ```
 
+Logs
+```
+heroku logs --app=huikang-cs --tail
+```
+
 ### Deploying your solution
 
 After you have edited and saved
