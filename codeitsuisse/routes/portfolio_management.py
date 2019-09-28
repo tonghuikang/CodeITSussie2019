@@ -17,8 +17,23 @@ def maximise_1a():
     name = [s[0] for s in data["stocks"]]
     profit = [s[1] for s in data["stocks"]]
     price = [s[2] for s in data["stocks"]]
-    # for _ in itertools.combinations(arr, r):
-        # pass
+
+    best = 0
+    best_combo = []
+    for r in range(1, len(data["stocks"])+1):
+        for combo in itertools.combinations(data["stocks"], r):
+            if sum([s[2] for s in combo]) > k:
+                pass
+            else:
+                profit = sum([s[1] for s in combo])
+                if profit > best:
+                    best = profit
+                best_combo = combo
+        
+        return json.dumps({
+            "profit" : best,
+            "portfolio" : best_combo
+        })
 
     # return json.dumps(result)
 

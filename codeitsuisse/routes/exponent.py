@@ -24,4 +24,4 @@ def exponent():
     res = {"result" : [first_digit, num_digits, last_digit]}
     print(res)
 
-    return json.dumps(res)
+    return json.dumps(res), 200, {'Content-Type': 'application/json; charset=utf-8'}
