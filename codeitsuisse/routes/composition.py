@@ -51,7 +51,7 @@ def min_delete(input_str, banned_list):
         return min(s1_value, s2_value)
 
     #Case where the last two characters are not in the banned list
-    shortened3 = input_str[:-2]
+    shortened3 = input_str[:-1]                             # -1 because the 2nd last char may be illegally paired with the 3rd last!
     print(min_delete(shortened3 , banned_list))
     return min_delete(shortened3 , banned_list)
 
