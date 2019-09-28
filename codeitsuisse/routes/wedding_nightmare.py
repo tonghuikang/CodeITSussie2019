@@ -113,6 +113,6 @@ def nightmare(request):
     return Response(json.dumps(response), mimetype='application/json')
 
 
-@app.route('/wedding_nightmare', methods=['POST'])
+@app.route('/wedding-nightmare', methods=['POST'])
 def wedding_nightmare():
     return nightmare(request)

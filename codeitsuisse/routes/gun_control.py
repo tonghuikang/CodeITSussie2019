@@ -85,6 +85,6 @@ def execution(request):
     result['hits'] = hits
     return jsonify(result)
 
-@app.route('/gun_control', methods=['POST'])
+@app.route('/gun-control', methods=['POST'])
 def gun_control():
     return execution(request)
