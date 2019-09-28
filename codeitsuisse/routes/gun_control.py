@@ -57,7 +57,7 @@ def execution(request):
     knapsack = set()
     def rabbithole(n,fuel):
         value = endpoints[n-1][2]
-        if n == 0 or fuel == 0:
+        if n <= 0 or fuel <= 0:
             result = 0
         elif value > fuel:
             result = rabbithole(n-1, fuel)
@@ -65,7 +65,7 @@ def execution(request):
             temp1 = value + rabbithole(n-1, fuel-value)
             temp2 = rabbithole(n-1, fuel)
             if temp1 > temp2:
-                knapsack.add(n)
+                knapsack.add(n-1)
                 result = temp1
             else:
                 result = temp2
@@ -75,12 +75,11 @@ def execution(request):
     rabbithole(num_endpoints,fuel)
     for item in knapsack:
         gun = dict()
-        endpoint = endpoints[item-1]
+        endpoint = endpoints[item]
         gun['cell'] = {'x':endpoint[1]+1,'y':endpoint[0]+1}
         gun['guns'] = endpoint[2]
         hits.append(gun)
 
-    print(hits)
     result = {}
     result['hits'] = hits
     return jsonify(result)
