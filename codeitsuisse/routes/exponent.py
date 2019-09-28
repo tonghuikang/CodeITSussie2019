@@ -17,7 +17,7 @@ def exponent():
     p = data["p"]
     print(n,p)
 
-    if n == 0 and n == 0:
+    if n == 0 and p == 0:
         return jsonify({"result" : [1, 1, 1]})
 
     if n == 0:
