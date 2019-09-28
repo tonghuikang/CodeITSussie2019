@@ -76,7 +76,7 @@ def opti(name, obj, prz, rsk, capital, risk):
     # risk = 10
 
     # y = [m.add_var(var_type=INTEGER) for i in range(4)]  # 1C
-    y = [m.add_var(var_type=BINARY, name=name[i]) for i in range(4)]  # 1A
+    y = [m.add_var(var_type=BINARY, name=name[i]) for i in range(len(name))]  # 1A
 
     m += xsum(prz[i]*y[i] for i in range(len(y))) <= capital
     m += xsum(rsk[i]*y[i] for i in range(len(y))) <= risk
