@@ -14,7 +14,7 @@ import codeitsuisse.routes.wedding_nightmare
 import codeitsuisse.routes.lottery
 import codeitsuisse.routes.dependency_manager
 
-# import codeitsuisse.routes.locked
+import codeitsuisse.routes.exponent
 import codeitsuisse.routes.ready_player1
 import codeitsuisse.routes.typing_contest
 
