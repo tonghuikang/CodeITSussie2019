@@ -134,7 +134,7 @@ def opti(name, obj, prz, rsk, capital, risk, vartype):
     tickers = []
     for entry in res:
         for _ in range(entry[1]):
-            tickers.append(entry[0])
+            tickers.append(entry[0]) 
 
 
     return abs(int(m.objective_value)), res, tickers

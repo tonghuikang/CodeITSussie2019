@@ -10,7 +10,7 @@ import codeitsuisse.routes.defuse
 import codeitsuisse.routes.wedding_nightmare
 # import codeitsuisse.routes.locked
 
-# import codeitsuisse.routes.locked
+import codeitsuisse.routes.sentiment
 import codeitsuisse.routes.lottery
 import codeitsuisse.routes.dependency_manager
 
