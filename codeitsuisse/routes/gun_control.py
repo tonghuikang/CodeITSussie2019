@@ -54,31 +54,75 @@ def execution(request):
     #greedy
     #knapsack problem in DP (kill me now)
     num_endpoints = len(endpoints)
-    knapsack = set()
-    def rabbithole(n,fuel,bag):
-        value = endpoints[n-1][2]
-        if n == 0 or fuel == 0:
-            result = (0,bag)
-        elif value > fuel:
-            result = rabbithole(n-1, fuel,bag)
-        else:
-            temp1 = bag + [n]
-            # result = max(value+rabbithole(n-1,fuel-value,temp1),rabbithole(n-1,fuel,bag))
-            number1, tempbag1 = rabbithole(n-1,fuel-value,temp1)
-            number1 += value
-            number2, tempbag2 = rabbithole(n-1,fuel,bag)
-            if number1 > number2:
-                result = (number1, tempbag1)
+
+    #naive recursive method
+    # def rabbithole(n,fuel,bag):
+    #     value = endpoints[n-1][2]
+    #     if n == 0 or fuel == 0:
+    #         result = (0,bag)
+    #     elif value > fuel:
+    #         result = rabbithole(n-1, fuel,bag)
+    #     else:
+    #         temp1 = bag + [n]
+    #         # result = max(value+rabbithole(n-1,fuel-value,temp1),rabbithole(n-1,fuel,bag))
+    #         number1, tempbag1 = rabbithole(n-1,fuel-value,temp1)
+    #         number1 += value
+    #         number2, tempbag2 = rabbithole(n-1,fuel,bag)
+    #         if number1 > number2:
+    #             result = (number1, tempbag1)
+    #         else:
+    #             result = (number2, tempbag2)
+    #     return result
+    # maxnumber, knapsack = rabbithole(num_endpoints,fuel, [])
+
+    # def knapSack(W, wt, val, n):
+    # K = [[0 for x in range(W + 1)] for x in range(n + 1)]
+    #
+    # # Build table K[][] in bottom up manner
+    # for i in range(n + 1):
+    #     for w in range(W + 1):
+    #         if i == 0 or w == 0:
+    #             K[i][w] = 0
+    #         elif wt[i-1] <= w:
+    #             K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w])
+    #         else:
+    #             K[i][w] = K[i-1][w]
+    #
+    # return K[n][W]
+    def rabbithole(n,fuel):
+        K = [[0 for _ in range(fuel+1)] for _ in range(n+1)]
+        for i in range(n+1):
+            value = 0
+            if i > 0:
+                value = endpoints[i-1][2]
+            for j in range(fuel+1):
+                if i == 0 or j == 0:
+                    K[i][j] = 0
+                elif value <= j:
+                    K[i][j] = max(value + K[i-1][j-value], K[i-1][j])
+                else:
+                    K[i][j] = K[i-1][j]
+        final = K[n][fuel]
+        row, column = n, fuel
+        knapsack = []
+        while True:
+            if K[row][column] == 0:
+                break
+            if K[row][column] == K[row-1][column]:
+                row = row - 1
             else:
-                result = (number2, tempbag2)
-        return result
+                row = row - 1
+                column = column - endpoints[row][2]
+                knapsack.append(endpoints[row])
+        return knapsack
+    knapsack = rabbithole(num_endpoints,fuel)
+
     hits = []
-    maxnumber, knapsack = rabbithole(num_endpoints,fuel, [])
     for item in knapsack:
         gun = dict()
-        endpoint = endpoints[item-1]
-        gun['cell'] = {'x':endpoint[1]+1,'y':endpoint[0]+1}
-        gun['guns'] = endpoint[2]
+        # endpoint = endpoints[item-1]
+        gun['cell'] = {'x':item[1]+1,'y':item[0]+1}
+        gun['guns'] = item[2]
         hits.append(gun)
 
     result = {}
