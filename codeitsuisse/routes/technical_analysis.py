@@ -17,7 +17,11 @@ def technical_analysis():
 
     result = []
     for ar in data:
-        result.append(optimise_case(ar))
+        try:
+            buy_sell = optimise_case(ar)
+        except:
+            buy_sell = [100,1099]
+        result.append(buy_sell)
 
     return jsonify(result)
 
