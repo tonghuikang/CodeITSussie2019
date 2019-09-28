@@ -7,6 +7,7 @@ from collections import Counter
 import requests
 import json
 from flask import Response
+import logging
 
 from flask import request, jsonify;
 
@@ -14,8 +15,7 @@ from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
 
-@app.route('/gun_control', methods=['POST'])
-def gun_control(request):
+def execution(request):
     def isValid(i,j):
         if i >= 0 and i < y_size and j >= 0 and j < x_size:
             if grid[i][j] == 'O' and visited[i][j] == 0:
@@ -80,6 +80,11 @@ def gun_control(request):
         gun['guns'] = endpoint[2]
         hits.append(gun)
 
+    print(hits)
     result = {}
     result['hits'] = hits
     return jsonify(result)
+
+@app.route('/gun_control', methods=['POST'])
+def gun_control():
+    return execution(request)

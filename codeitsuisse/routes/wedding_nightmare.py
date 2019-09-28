@@ -1,17 +1,24 @@
-import logging
+import sys
+import os
+import tempfile
+from flask import escape
+from flask import jsonify
+from collections import Counter
+import requests
 import json
-import Response
+from flask import Response
+import logging
+
 from flask import request, jsonify;
 
 from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
 
-@app.route('/wedding_nightmare', methods=['POST'])
-def wedding_nightmare(request):
+def nightmare(request):
     test_cases = request.get_json(silent=True)
-    request_args = request.args
     response = []
+    print(test_cases)
     for test_case in test_cases:
         test_case_num = test_case['test_case']
         guests = test_case['guests']
@@ -20,7 +27,7 @@ def wedding_nightmare(request):
         enemies = (test_case['enemies'])
         families = test_case['families']
 
-        #create an enemies dictionary
+        #create an enemies dictionary for )
         enemies_dict = {}
         for person1, person2 in enemies:
             if person1 not in enemies_dict.keys():
@@ -92,14 +99,20 @@ def wedding_nightmare(request):
 
         disjoint_sets[0] = disjoint_sets[0].union(remaining)
 
+        print(disjoint_sets)
         allocation = []
         for num, table in enumerate(disjoint_sets):
             for person in table:
                 allocation.append([person,num+1])
+        print(allocation)
         res = {"test_case": test_case_num, 'satisfiable': True, 'allocation': allocation}
         response.append(res)
+    print(response)
 
-    # print(response)
     # return json.dumps(response)
-    return Response(json.dumps(response))
-    # return jsonify(response)
+    return Response(json.dumps(response), mimetype='application/json')
+
+
+@app.route('/wedding_nightmare', methods=['POST'])
+def wedding_nightmare():
+    return nightmare(request)
