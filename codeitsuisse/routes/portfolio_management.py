@@ -44,14 +44,16 @@ def maximise_1b():
     obj = [s[1] for s in data["stocks"]]
     prz = [s[2] for s in data["stocks"]]
     rsk = [0 for s in data["stocks"]]
-    capital = data["startingCapital"]
+    capital = data["startingCapital"] - sum(prz)
+    if capital < 0:
+        return jsonify({"profit" : 0, "portfolio" : []})
     risk = 1
 
-    profit, res, tickers = opti(name, obj, prz, rsk, capital, risk, BINARY)
+    profit, res, tickers = opti(name, obj, prz, rsk, capital, risk, INTEGER)
 
     answer = {}
-    answer["profit"] = profit
-    answer["portfolio"] = tickers
+    answer["profit"] = profit + sum(obj)
+    answer["portfolio"] = tickers + [name_ for name_ in name]
 
     return jsonify(answer)
 
