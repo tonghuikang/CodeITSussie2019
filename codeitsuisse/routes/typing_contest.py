@@ -12,7 +12,7 @@ from collections import Counter, defaultdict
 
 logger = logging.getLogger(__name__)
 
-@app.route('/typing_contest', methods=['POST'])
+@app.route('/typing-contest', methods=['POST'])
 def typing_contest():
     data = request.get_json()
 
