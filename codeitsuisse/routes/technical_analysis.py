@@ -20,6 +20,7 @@ def technical_analysis():
         try:
             buy_sell = optimise_case(ar)
         except:
+            print("aborted")
             buy_sell = [100,1099]
         result.append(buy_sell)
 
