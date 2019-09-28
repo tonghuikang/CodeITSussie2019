@@ -6,7 +6,7 @@ import codeitsuisse.routes.chess
 # import codeitsuisse.routes.locked
 # import codeitsuisse.routes.locked
 
-# import codeitsuisse.routes.locked
+import codeitsuisse.routes.composition
 import codeitsuisse.routes.wedding_nightmare
 # import codeitsuisse.routes.locked
 

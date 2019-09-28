@@ -26,4 +26,4 @@ def lottery():
     #logging.info("My result :{}".format(result))
 
     #return json.dumps(guess_array)
-    return Response(json.dumps(guess_array), mimetype='application/json')
+    return Response(json.dumps(guess_array), mimetype='application/json')        #Crucial for returning it as a application/json
