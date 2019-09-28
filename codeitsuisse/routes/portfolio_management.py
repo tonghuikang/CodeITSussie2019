@@ -118,6 +118,9 @@ def opti(name, obj, prz, rsk, capital, risk, vartype):
 
     m += xsum(prz[i]*y[i] for i in range(len(y))) <= capital
     m += xsum(rsk[i]*y[i] for i in range(len(y))) <= risk
+
+    for i in range(len(y)):
+        m += y[i] >= 0
     m.objective = xsum(obj[i]*y[i] for i in range(len(y)))
 
     m.max_gap = 0.05
