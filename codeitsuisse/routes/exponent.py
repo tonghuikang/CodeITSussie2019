@@ -17,11 +17,12 @@ def exponent():
     p = data["p"]
     print(n,p)
 
-    if n == 0 and p == 0:
+    if p == 0:
         return jsonify({"result" : [1, 1, 1]})
 
     if n == 0:
         return jsonify({"result" : [0, 1, 0]})
+
 
     last_digit = (n%10)**(p%4 + 4)%10
     exponent = p * math.log10(n)
