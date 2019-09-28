@@ -23,7 +23,7 @@ def exponent():
     if n == 0:
         return jsonify({"result" : [0, 1, 0]})
 
-    last_digit = (n%10)**(p%20)%10
+    last_digit = (n%10)**(p%4 + 4)%10
     exponent = p * math.log10(n)
     first_digit = int(10 ** (exponent%1) // 1)
     num_digits = int((exponent // 1) + 1)
