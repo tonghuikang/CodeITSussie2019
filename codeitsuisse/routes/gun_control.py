@@ -53,7 +53,7 @@ def execution(request):
 
     #greedy
     #knapsack problem in DP (kill me now)
-    num_endpoints = len(endpoints)-1
+    num_endpoints = len(endpoints)
     knapsack = set()
     def rabbithole(n,fuel):
         value = endpoints[n-1][2]
