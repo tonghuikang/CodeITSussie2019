@@ -3,7 +3,7 @@ import json
 import random
 
 
-from flask import request, jsonify;
+from flask import request, jsonify, Response;
 
 from codeitsuisse import app;
 
@@ -25,4 +25,5 @@ def lottery():
     #result = inputValue * inputValue
     #logging.info("My result :{}".format(result))
 
-    return json.dumps(guess_array)
+    #return json.dumps(guess_array)
+    return Response(json.dumps(guess_array), mimetype='application/json')
