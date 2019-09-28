@@ -30,25 +30,25 @@ def solve(question):
 
     NUM = 998244353
     res = 0
-    t = arr
-    for comb in [t[i:i+j] for i in range(len(t)-3) for j in range(3,len(t)+1,2)]:
-        r = len(comb)
-        half = len(comb) // 2
+    for r in range(3,len(arr)+1,2):
+        half = int((r-1)/2)
         print(r,half)
-
-        for h in range(half):
-            if arr[h] != -1 and arr[-1-h] != -1:
-                if arr[h] != arr[-1-h]:
-                    continue
-        count = 0
-        for h in range(half):
-            if arr[h] != -1 or arr[-1-h] != -1:
-                pass
-            else:
-                count += 1
-            if arr[half] == -1:
-                count += 1
-        print(k**count)
-        res += (k**count) % NUM
+        combi = itertools.combinations(arr, r)
+        for comb in list(set(combi)):
+            for h in range(half):
+                if arr[h] != -1 and arr[-1-h] != -1:
+                    if arr[h] != arr[-1-h]:
+                        continue
+            count = 0
+            for h in range(half):
+                if arr[h] != -1 or arr[-1-h] != -1:
+                    pass
+                else:
+                    count += 1
+                if arr[half] == -1:
+                    count += 1
+            res += (k**count) % NUM
     return res
+
+
 
