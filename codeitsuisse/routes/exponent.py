@@ -15,7 +15,7 @@ def exponent():
 
     n = data["n"]
     p = data["p"]
-
+    print(n,p)
     last_digit = n**(p%10)%10
     exponent = p * math.log10(n)
     first_digit = int(10 ** (exponent%1) // 1)
