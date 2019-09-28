@@ -23,11 +23,6 @@ def maximise_1a():
     # return json.dumps(result)
 
 
-
-
-
-
-
 @app.route('/maximise_1b', methods=['POST'])
 def maximise_1b():
     data = request.get_json()
