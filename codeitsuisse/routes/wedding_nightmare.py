@@ -1,6 +1,6 @@
 import logging
 import json
-
+import Response
 from flask import request, jsonify;
 
 from codeitsuisse import app;
@@ -20,7 +20,7 @@ def wedding_nightmare(request):
         enemies = (test_case['enemies'])
         families = test_case['families']
 
-        #create an enemies dictionary for )
+        #create an enemies dictionary
         enemies_dict = {}
         for person1, person2 in enemies:
             if person1 not in enemies_dict.keys():
@@ -99,4 +99,7 @@ def wedding_nightmare(request):
         res = {"test_case": test_case_num, 'satisfiable': True, 'allocation': allocation}
         response.append(res)
 
-    return json.dumps(response)
+    # print(response)
+    # return json.dumps(response)
+    return Response(json.dumps(response), mimetype='application/json')
+    # return jsonify(response)
