@@ -34,9 +34,12 @@ Output: Int reflecting the number of deletes required
 def min_delete(input_str, banned_list):
     str_length = len(input_str)
     print(input_str)
-    if str_length == 0:
+    if str_length == 0 or str_length == 1: #The banned_list will never contain a str with only 0/1 char
         print(0)
         return 0
+
+    # if str_length == 2: #The banned_list will never contain a str with only 1 char
+    #    if input_str in banned_list:
 
     if input_str[-2:] in banned_list:
         #print(input_str + 'hihi') just testing this
