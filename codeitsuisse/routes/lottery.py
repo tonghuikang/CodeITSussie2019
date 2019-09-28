@@ -24,4 +24,5 @@ def lottery():
     #inputValue = data.get("input")
     #result = inputValue * inputValue
     #logging.info("My result :{}".format(result))
+
     return json.dumps(guess_array)
