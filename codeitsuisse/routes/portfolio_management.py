@@ -25,7 +25,7 @@ def maximise_1a():
     capital = data["startingCapital"]
     risk = 1
 
-    profit, res, tickers = opti(name, obj, prz, rsk, capital, risk)
+    profit, res, tickers = opti(name, obj, prz, rsk, capital, risk, BINARY)
 
     answer = {}
     answer["profit"] = profit
@@ -38,32 +38,68 @@ def maximise_1a():
 def maximise_1b():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
-    inputValue = data.get("input")
-    result = inputValue * inputValue
-    logging.info("My result :{}".format(result))
-    return json.dumps(result)
+
+    print(data)
+    name = [s[0] for s in data["stocks"]]
+    obj = [s[1] for s in data["stocks"]]
+    prz = [s[2] for s in data["stocks"]]
+    rsk = [0 for s in data["stocks"]]
+    capital = data["startingCapital"]
+    risk = 1
+
+    profit, res, tickers = opti(name, obj, prz, rsk, capital, risk, BINARY)
+
+    answer = {}
+    answer["profit"] = profit
+    answer["portfolio"] = tickers
+
+    return jsonify(answer)
 
 @app.route('/maximise_1c', methods=['POST'])
 def maximise_1c():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
-    inputValue = data.get("input")
-    result = inputValue * inputValue
-    logging.info("My result :{}".format(result))
-    return json.dumps(result)
+
+    print(data)
+    name = [s[0] for s in data["stocks"]]
+    obj = [s[1] for s in data["stocks"]]
+    prz = [s[2] for s in data["stocks"]]
+    rsk = [0 for s in data["stocks"]]
+    capital = data["startingCapital"]
+    risk = 1
+
+    profit, res, tickers = opti(name, obj, prz, rsk, capital, risk, INTEGER)
+
+    answer = {}
+    answer["profit"] = profit
+    answer["portfolio"] = tickers
+
+    return jsonify(answer)
 
 @app.route('/maximise_2', methods=['POST'])
 def maximise_2():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
-    inputValue = data.get("input")
-    result = inputValue * inputValue
-    logging.info("My result :{}".format(result))
-    return json.dumps(result)
+
+    print(data)
+    name = [s[0] for s in data["stocks"]]
+    obj = [s[1] for s in data["stocks"]]
+    prz = [s[2] for s in data["stocks"]]
+    rsk = [s[3] for s in data["stocks"]]
+    capital = data["startingCapital"]
+    risk = data["risk"]
+
+    profit, res, tickers = opti(name, obj, prz, rsk, capital, risk, BINARY)
+
+    answer = {}
+    answer["profit"] = profit
+    answer["portfolio"] = tickers
+
+    return jsonify(answer)
 
 
 
-def opti(name, obj, prz, rsk, capital, risk):
+def opti(name, obj, prz, rsk, capital, risk, vartype):
 
     m = Model()
     m = Model(sense=MAXIMIZE, solver_name="cbc")
@@ -76,7 +112,7 @@ def opti(name, obj, prz, rsk, capital, risk):
     # risk = 10
 
     # y = [m.add_var(var_type=INTEGER) for i in range(4)]  # 1C
-    y = [m.add_var(var_type=BINARY, name=name[i]) for i in range(len(name))]  # 1A
+    y = [m.add_var(var_type=vartype, name=name[i]) for i in range(len(name))]  # 1A
 
     m += xsum(prz[i]*y[i] for i in range(len(y))) <= capital
     m += xsum(rsk[i]*y[i] for i in range(len(y))) <= risk
