@@ -18,9 +18,7 @@ def readyplayerone():
     Jar_1 = list(range(1, N_integer + 1, 1))
     Jar_2 = []
     calculated = strategy(N_integer, T_totaldesired, Jar_1, Jar_2)
-    output = {"res" : calculated}
-    return Response(json.dumps(output), mimetype='application/json')
-
+    return Response(json.dumps(calculated), mimetype='application/json')
 
 
 def strategy(N_integer, T_totaldesired , Jar_1 , Jar_2):
