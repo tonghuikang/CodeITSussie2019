@@ -35,47 +35,48 @@ def technical_analysis():
     return jsonify(result)
 
 
+def fit_sin_base(tt, yy):
+    '''Fit sin to the input time sequence, and return fitting parameters "amp", "omega", "phase", "offset", "freq", "period" and "fitfunc"'''
+    tt = numpy.array(tt)
+    yy = numpy.array(yy)
+    ff = numpy.fft.fftfreq(len(tt), (tt[1]-tt[0]))   # assume uniform spacing
+    Fyy = abs(numpy.fft.fft(yy))
+    # plt.plot(Fyy[1:])
+    # plt.show()
+    guess_index = numpy.argmax(Fyy[4:len(Fyy)//2])+4
+    guess_freq = abs(ff[guess_index]+4)   # excluding the zero frequency "peak", which is related to offset
+    print(guess_index)
+    guess_amp = numpy.std(yy) * 2.**0.5
+    guess_offset = numpy.mean(yy)
+    guess = numpy.array([guess_amp, 2.*numpy.pi*guess_freq, np.random.randn(),
+                            guess_amp, 2.*numpy.pi*guess_freq, -0.01,
+#                          guess_amp, 2.*numpy.pi*guess_freq, 0.,
+                        numpy.mean(yy[:len(yy)//2]) - numpy.mean(yy[len(yy)//2:]) / (len(yy)//2), 
+                        guess_offset])
+
+    def sinfunc(t, 
+                A1, w1, p1, 
+                A2, w2, p2,
+#                 A3, w3, p3, 
+                k, c):  return (A1 * numpy.sin(w1*t + p1) + 
+                                A2 * numpy.sin(w2*t + p2) +
+#                               A3 * numpy.sin(w3*t + p3) +
+                                k*t + c)
+    popt, pcov = scipy.optimize.curve_fit(sinfunc, tt, yy, p0=guess)
+    (A1, w1, p1,
+        A2, w2, p2, 
+#      A3, w3, p3,
+    k, c) = popt
+    
+    fitfunc = lambda t: sinfunc(t, *popt)
+    loss = np.sum(np.abs([fitfunc(t) for t in tt] -  yy))
+
+    fitfunc = lambda t: sinfunc(t, *popt)
+    return {"loss": loss, "fitfunc": fitfunc, "maxcov": numpy.max(pcov), "rawres": (guess,popt,pcov)}
+
+
+
 def optimise_case(arr_in):
-
-    def fit_sin_base(tt, yy):
-        '''Fit sin to the input time sequence, and return fitting parameters "amp", "omega", "phase", "offset", "freq", "period" and "fitfunc"'''
-        tt = numpy.array(tt)
-        yy = numpy.array(yy)
-        ff = numpy.fft.fftfreq(len(tt), (tt[1]-tt[0]))   # assume uniform spacing
-        Fyy = abs(numpy.fft.fft(yy))
-        # plt.plot(Fyy[1:])
-        # plt.show()
-        guess_index = numpy.argmax(Fyy[4:len(Fyy)//2])+4
-        guess_freq = abs(ff[guess_index]+4)   # excluding the zero frequency "peak", which is related to offset
-        print(guess_index)
-        guess_amp = numpy.std(yy) * 2.**0.5
-        guess_offset = numpy.mean(yy)
-        guess = numpy.array([guess_amp, 2.*numpy.pi*guess_freq, np.random.randn(),
-                             guess_amp, 2.*numpy.pi*guess_freq, -0.01,
-    #                          guess_amp, 2.*numpy.pi*guess_freq, 0.,
-                            numpy.mean(yy[:len(yy)//2]) - numpy.mean(yy[len(yy)//2:]) / (len(yy)//2), 
-                            guess_offset])
-
-        def sinfunc(t, 
-                    A1, w1, p1, 
-                    A2, w2, p2,
-    #                 A3, w3, p3, 
-                    k, c):  return (A1 * numpy.sin(w1*t + p1) + 
-                                    A2 * numpy.sin(w2*t + p2) +
-    #                               A3 * numpy.sin(w3*t + p3) +
-                                    k*t + c)
-        popt, pcov = scipy.optimize.curve_fit(sinfunc, tt, yy, p0=guess)
-        (A1, w1, p1,
-         A2, w2, p2, 
-    #      A3, w3, p3,
-        k, c) = popt
-        
-        fitfunc = lambda t: sinfunc(t, *popt)
-        loss = np.sum(np.abs([fitfunc(t) for t in tt] -  yy))
-
-        fitfunc = lambda t: sinfunc(t, *popt)
-        return {"loss": loss, "fitfunc": fitfunc, "maxcov": numpy.max(pcov), "rawres": (guess,popt,pcov)}
-
 
     larger_range = 1099
 
