@@ -20,12 +20,12 @@ def technical_analysis():
     losses = []
     for i,ar in enumerate(data):
         candidates = []
-        for _ in range(150):
+        for _ in range(50):
             try:
                 candidates.append(optimise_case(ar, casenum = i))
             except Exception as e: 
                 print(e)
-            if candidates != [] and candidates[-1]["loss"] < 20:
+            if candidates != [] and candidates[-1]["loss"] < 22:
                 break
         if len(candidates) == 0:
             result.append([100,1099])
