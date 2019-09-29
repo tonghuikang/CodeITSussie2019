@@ -25,7 +25,7 @@ def branch():
     
     answer = cst
     print(answer)
-    return jsonify({"answer" : answer})
+    return jsonify({"answer" : answer+1})
 
 
 @app.route('/secretmessage', methods=['POST'])
