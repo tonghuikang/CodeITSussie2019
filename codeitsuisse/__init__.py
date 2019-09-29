@@ -15,7 +15,7 @@ import codeitsuisse.routes.lottery
 import codeitsuisse.routes.dependency_manager
 
 # import codeitsuisse.routes.locked
-import codeitsuisse.routes.ready_player1
+import codeitsuisse.routes.readyplayerone
 import codeitsuisse.routes.typing_contest
 
 import codeitsuisse.routes.gun_control
