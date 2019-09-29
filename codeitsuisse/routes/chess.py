@@ -4,6 +4,7 @@ import json
 from flask import request, jsonify;
 
 from codeitsuisse import app;
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -15,13 +16,15 @@ def branch():
     free = [0 for _ in range(len(branch))]
     customer = data["N"]
     print(customer)
-    
+
+    if customer > 1000:
+        time.sleep(1)
+
     for i in range(customer):
         cst = free.index(min(free))
         free[cst] = free[cst] + branch[cst]
         # print(free)
-        if i > 100000:
-            break
+
     
     answer = cst
     print(answer)
@@ -39,7 +42,7 @@ def message():
     res = []
     for entry in data:
         n, text = entry["n"], entry["text"]
-        text = text.upper().replace(" ", "")
+        text = text.upper().replace(" ", "").replace("_","")
         text = re.sub(r'\W+', '', text)
 
         print(text)
