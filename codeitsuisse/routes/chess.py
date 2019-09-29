@@ -49,20 +49,26 @@ def message():
         if n >= len(text):
             ans = text
         else:
-            ans = ["" for _ in range(n*((len(text) // n) + 1))]
-            txt = list(text) + [""]*(len(ans) - len(text))
-            print(txt)
-            for i in range(n):
-                k = len(txt)//n
-                # print(k)
-                # print(len(ans[i::n]))
-                # print(len(txt[i*k:(i+1)*k]))
-                # print(txt[i*k:(i+1)*k])
-                # print(i*k)
-                # print((i+1)*k)
-                # print()
-                ans[i::n] = txt[i*k:(i+1)*k]
-                print(ans)
-        res.append("".join(ans)[:len(text)])
+            res = None
+        #     ans = ["" for _ in range(n*((len(text) // n) + 1))]
+        #     ans = [range(len(answer))]
+        #     ptt = ["" for _ in range(n*((len(text) // n) + 1))]
+        #     for i in ans//n:
+        #         # ptt[i::n] = ans[]
+
+        #     txt = list(text) + [""]*(len(ans) - len(text))
+        #     print(txt)
+        #     for i in range(n):
+                
+        #         # print(k)
+        #         # print(len(ans[i::n]))
+        #         # print(len(txt[i*k:(i+1)*k]))
+        #         # print(txt[i*k:(i+ 1)*k])
+        #         # print(i*k)
+        #         # print((i+1)*k)
+        #         # print()
+        #         ans[i::n] = txt[i*k:(i+1)*k]
+        #         print(ans)
+        # res.append("".join(ans)[:len(text)])
 
     return jsonify(res)
