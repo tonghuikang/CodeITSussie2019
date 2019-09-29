@@ -19,7 +19,7 @@ def technical_analysis():
     result = []
     for i,ar in enumerate(data):
         candidates = []
-        for _ in range(10):
+        for _ in range(100):
             try:
                 candidates.append(optimise_case(ar, casenum = i))
             except Exception as e: 
