@@ -61,7 +61,7 @@ def message():
                 # print(i*k)
                 # print((i+1)*k)
                 # print()
-                ans[i::n] = txt[i*k:(i+1)*k]
+                ans[i*k:(i+1)*k] = txt[i::n]
                 print(ans)
         res.append("".join(ans)[:len(text)])
 
