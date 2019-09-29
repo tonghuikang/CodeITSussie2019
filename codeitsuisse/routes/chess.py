@@ -8,67 +8,47 @@ import time
 
 logger = logging.getLogger(__name__)
 
-@app.route('/bankbranch', methods=['POST'])
-def branch():
-    data = request.get_json()
-    logging.info("data sent for evaluation {}".format(data))
-    branch = data["branch_officers_timings"]
-    free = [0 for _ in range(len(branch))]
-    customer = data["N"]
-    print(customer)
 
-    if customer > 1000:
-        time.sleep(1)
+def chessgame(request):
+    chessboard = request.get_json(silent=True)
+    request_args = request.args
+    q_pos = None
+    for i, row in enumerate(chessboard):
+        for j, square in enumerate(chessboard):
+            if chessboard[i][j] == 'K':
+                q_pos = (i,j)
 
-    for i in range(customer):
-        cst = free.index(min(free))
-        free[cst] = free[cst] + branch[cst]
-        # print(free)
+    length = len(chessboard)
+    attack_count = 0
+    directions = [(length,1),(-1,-1)]
+    #check horizontal row
+    for end, direction in directions:
+        for j in range(q_pos[1],end,direction):
+            if chessboard[q_pos[0]][j] == '':
+                attack_count += 1
+            elif chessboard[q_pos[0]][j] == 'X':
+                break
+    #check vertical
+    for end, direction in directions:
+        for i in range(q_pos[0],end,direction):
+            if chessboard[i][q_pos[1]] == '':
+                attack_count += 1
+            elif chessboard[i][q_pos[1]] == 'X':
+                break
+    #check diagonals
+    dir = [(1,1),(-1,-1),(-1,1),(1,-1)]
+    for i_plus, j_plus in dir:
+        i, j = q_pos[0], q_pos[1]
+        while i < length and i >= 0 and j < length and j >= 0:
+            if chessboard[i][j] == '':
+                attack_count += 1
+            elif chessboard[i][j] == 'X':
+                break
+            i, j = i + i_plus , j + j_plus
+    print('attack count:', attack_count)
 
-    
-    answer = cst
-    print(answer)
-    return jsonify({"answer" : answer+1})
+    return str(attack_count)
 
-
-import re
-
-@app.route('/encryption', methods=['POST'])
-def message():
-    data = request.get_json()
-    logging.info("data sent for evaluation {}".format(data))
-    print(data)
-    # branch = data["branch_officers_timings"]
-
-    res = []
-    for entry in data:
-        n, text = entry["n"], entry["text"]
-        text = text.upper().replace(" ", "").replace("_","")
-        text = re.sub(r'\W+', '', text)
-        print(text, "text")
-        if n >= len(text):
-            ans = text
-        else:
-            res = None
-        #     ans = ["" for _ in range(n*((len(text) // n) + 1))]
-        #     ans = [range(len(answer))]
-        #     ptt = ["" for _ in range(n*((len(text) // n) + 1))]
-        #     for i in ans//n:
-        #         # ptt[i::n] = ans[]
-
-        #     txt = list(text) + [""]*(len(ans) - len(text))
-        #     print(txt)
-        #     for i in range(n):
-                
-        #         # print(k)
-        #         # print(len(ans[i::n]))
-        #         # print(len(txt[i*k:(i+1)*k]))
-        #         # print(txt[i*k:(i+ 1)*k])
-        #         # print(i*k)
-        #         # print((i+1)*k)
-        #         # print()
-        #         ans[i::n] = txt[i*k:(i+1)*k]
-        #         print(ans)
-        # res.append("".join(ans)[:len(text)])
-
-    return jsonify(res)
+@app.route('/chessgame', methods=['POST'])
+def chess():
+    return chessgame(request)
