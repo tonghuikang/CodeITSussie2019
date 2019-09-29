@@ -1,5 +1,6 @@
 import logging
 import json
+import copy
 
 from flask import request, jsonify;
 
@@ -43,18 +44,12 @@ def prismo(request):
                 if square == 0:
                     pos_index = (i,j)
                     break
-        # for i, row in enumerate(goal):
-        #     for j, square in enumerate(row):
-        #         if square == 0:
-        #             goal_index = (i,j)
-        #             break
         directions = [(1,0),(0,1),(-1,0),(0,-1)]
         last_visited = None
         stack = []
-        stack.append((pos_index,last_visited))
-
+        stack.append((pos_index,last_visited, initial, []))
         while len(stack) > 0 and initial != goal:
-            pos_index, last_visited = stack.pop(0)
+            pos_index, last_visited, initial, moves = stack.pop(0)
             goal_square = goal[pos_index[0]][pos_index[1]]
             continues = 0
             for x_plus, y_plus in directions:
@@ -62,15 +57,12 @@ def prismo(request):
                 if (x,y) == last_visited:
                     continue
                 if x < x_length and x >= 0 and y < y_length and y >= 0:
-                    print('goal:', goal[pos_index[0]][pos_index[1]])
-                    print(initial[x][y], goal_square, 'helooooooo', (x,y), pos_index)
                     if initial[x][y] == goal_square:
-                        print('helooooooo')
                         last_visited = (pos_index[0],pos_index[1])
                         initial[pos_index[0]][pos_index[1]], initial[x][y] =  initial[x][y], 0
                         pos_index = (x,y)
-                        stack.append(((x,y),last_visited))
                         moves.append(addMoves((x_plus,y_plus)))
+                        stack.append(((x,y),last_visited),initial,moves)
                         print('up:', initial)
                         continues = 1
                         break
@@ -85,17 +77,26 @@ def prismo(request):
                             goal_array.append((goal[x][y]))
                 for value, location in initial_array:
                     if value in goal_array:
-                        print('hihihi',pos_index,last_visited, location)
                         move_direction = (location[0] - pos_index[0], location[1] - pos_index[1])
                         initial[pos_index[0]][pos_index[1]], initial[location[0]][location[1]] = initial[location[0]][location[1]], initial[pos_index[0]][pos_index[1]]
-                        # last_visited, pos_index = pos_index, location
-                        stack.append((location, pos_index))
+                        stack.append((location, pos_index, initial))
                         moves.append(addMoves((move_direction)))
                         print('down:',initial)
 
+    print(initial)
 
     return jsonify({'moves':moves})
-#
+
+# {
+#   "initial": [[ 1, 2, 3, 4],
+#               [ 5, 6, 7, 8],
+#               [ 9,10,12, 0],
+#               [13,14,11,15]],
+#   "goal": [[ 1, 2, 3, 4],
+#            [ 5, 6, 7, 0],
+#            [ 9,10,11,8],
+#            [13,14,15, 12]]
+# }
 
 @app.route('/prismo', methods=['POST'])
 def evaluate():
