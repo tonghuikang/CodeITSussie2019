@@ -21,19 +21,20 @@ def encryption():
         output_string = encrypt(int_step, clean_input)
         final_output.append(output_string)
 
-    return jsonify(final_output)
-    #return Response(json.dumps(final_output), mimetype='application/json')
+    #return jsonify(final_output)
+    return Response(json.dumps(final_output), mimetype='application/json')
 
 
 """
 Preprocessing the input for encryption
 """
 def sanitise(cleartext):
+    uppertext = cleartext.upper()
     alpha_string = ""
-    for char in cleartext:
-        if char.isalpha() or char.isdigit():
-            alpha_string += char
-    return alpha_string.upper()
+    for char in uppertext:
+        if char.isalnum():
+            alpha_string = alpha_string + char
+    return alpha_string
 
 
 """
@@ -45,8 +46,7 @@ def encrypt(int_step, clean_input):
         return clean_input
 
     encrypt_length = len(clean_input)
-    cipher = [0]*encrypt_length    # Dealing with an array first for easy indexing, convert to string later
-    # 0 is the sentinel
+    cipher = ["0"]*encrypt_length    # Dealing with an array first for easy indexing, convert to string later
     for index in range(len(clean_input)):
         mod_index = (index * int_step) % len(clean_input)       # Using modulo to wrap around the ciphertext!
         cipher[mod_index] = clean_input[index]
