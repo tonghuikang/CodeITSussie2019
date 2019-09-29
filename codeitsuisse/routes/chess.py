@@ -33,10 +33,11 @@ def branch():
 
 import re
 
-@app.route('/secretmessage', methods=['POST'])
+@app.route('/encryption', methods=['POST'])
 def message():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
+    print(data)
     # branch = data["branch_officers_timings"]
 
     res = []
