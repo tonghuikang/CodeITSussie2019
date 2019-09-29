@@ -13,9 +13,10 @@ def readyplayerone():
     data = request.get_json()
     # print(data)
     # logging.info("data sent for evaluation {}".format(data))
-    N_integer = data["maxChoosableInteger"]
-    T_totaldesired = data["desiredTotal"]
-    Jar_1 = list(range(1, N_integer + 1, 1))
+    N_integer = int(data["maxChoosableInteger"])
+    T_totaldesired = int(data["desiredTotal"])
+    Jar_pre1 = range(1, N_integer+1)
+    Jar_1 = list(Jar_pre1)
     Jar_2 = []
     calculated = strategy(N_integer, T_totaldesired, Jar_1, Jar_2)
     output = {"res" : calculated}
@@ -45,7 +46,7 @@ def strategy(N_integer, T_totaldesired , Jar_1 , Jar_2):
             Jar_1.remove(number)
             Jar_2.append(number)
 
-    turns = len(Jar_2) + 1
+    turns = len(Jar_2)+1
     if turns % 2  == 0:
         return -1
     else:
