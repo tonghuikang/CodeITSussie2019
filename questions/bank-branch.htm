@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructions</title>
+    <style>
+        h1 { text-align: center; }
+        h2 {
+            border-bottom: 1px solid grey;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        pre {
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding: 20px;
+            text-align: justify;
+            background-color: white;
+            width: 460px;
+            display: inline-block;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+            padding: 0 20px;
+            text-align: justify;
+            background-color: #f1f1f1;
+            width: 500px;
+            display: inline-block;
+        }
+        .container {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bank Branch</h1>
+    <div class="container">
+        <div class="card">
+            <h2>Instructions</h2>
+            <p>
+                While most banks are striving to divert their customers away from branches to consume their digital banking services, many customers today still choose to visit the bank branch.
+                <br><br>
+                On a normal day, customers are patiently waiting in line at the bank branch, each waiting to be served by a branch officer. There are branch officers who can be determined from a collection of whole numbers given to you. [2, 3, 10, 4] would give you B = 4 branch officers working that day, and each branch officer can be uniquely identified by their id, which is the index + 1 of each element in that collection. Branch officers have their own X amount of serving time and their serving time can be determined by the element in the collection.
+                <br><br>
+                For example, the first branch officer has X = 2, the second branch officer has X = 3, the third branch officer has X = 10 and the fourth branch officer has X = 4. Each branch officer can only serve 1 customer at a time. When the bank first opens and/or when there are multiple available branch officers, the customer at the head of the queue will proceed to the lowest numbered branch officer. Once a branch officer finishes serving a customer, he immediately serves the next customer in line. When no branch officers are available, the customer next in line will have to wait until the next branch officer is available.
+                <br><br>
+                You are the Nth customer in the queue, determine the id of the branch officer that will serve you.
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Part 1 Constraints (Peaceful Morning)</h2>
+            <p>
+                1 <= B <= 100
+                <br><br>
+                1 <= X <= 20
+                <br><br>
+                1 <= N <= 1000
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Sample Input Peaceful Morning</h2>
+            <pre id="inputPM"></pre>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Sample Output Peaceful Morning</h2>
+            <pre id="outputPM"></pre>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Part 2 Constraints (Crazy Lunchtime Crowd)</h2>
+            <p>
+                1 <= B <= 1000
+                <br><br>
+                1 <= X <= 100_000
+                <br><br>
+                1 <= N <= 1_000_000_000
+                <br><br>
+                HTTP Timeout Request: 25s
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Sample Input Crazy Lunchtime Crowd</h2>
+            <pre id="inputCC"></pre>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Sample Output Crazy Lunchtime Crowd</h2>
+            <pre id="outputCC"></pre>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Evaluation</h2>
+            <p>
+                Successfully solving Peaceful Morning will grant you 40% of the total score and solving Crazy Lunchtime Crowd will grant you the remaining 60%.
+            </p>
+            <p>
+                Your solution will be run against random test cases. You are encouraged to write a solution to solve Peaceful Morning first before attempting to solve Crazy Lunchtime Crowd.
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Requirements</h2>
+            <p>
+                Expose 1 POST endpoint with content-type application/json. Your single endpoint will be tested for both Peaceful Morning and Crazy Lunchtime Crowd.
+                <ul>
+                    <li>/bankbranch</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const inputPm = {
+            "N":6,
+            "branch_officers_timings":[
+                2,
+                3
+            ]
+        };
+        const outputPm = { "answer": 1 };
+        const inputCc = {
+            "N":800000002,
+            "branch_officers_timings":[
+                2,
+                100000,
+                100000,
+                100000,
+                100000,
+                100000,
+                100000,
+                100000,
+                100000,
+                3
+            ]
+        };
+        const outputCc = { "answer": 10 };
+
+        document.getElementById("inputPM").innerHTML = JSON.stringify(inputPm, undefined, 2);
+        document.getElementById("outputPM").innerHTML = JSON.stringify(outputPm, undefined, 2);
+        document.getElementById("inputCC").innerHTML = JSON.stringify(inputCc, undefined, 2);
+        document.getElementById("outputCC").innerHTML = JSON.stringify(outputCc, undefined, 2);
+    </script>
+</body>
+</html>
