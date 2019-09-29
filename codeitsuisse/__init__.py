@@ -8,7 +8,6 @@ import codeitsuisse.routes.chess
 
 import codeitsuisse.routes.defuse
 import codeitsuisse.routes.wedding_nightmare
-# import codeitsuisse.routes.locked
 
 import codeitsuisse.routes.sentiment
 import codeitsuisse.routes.lottery

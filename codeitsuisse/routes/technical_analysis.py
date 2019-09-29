@@ -197,8 +197,8 @@ def optimise_case1(arr_in):
         Fyy = abs(numpy.fft.fft(yy))
         # plt.plot(Fyy[1:])
         # plt.show()
-        guess_index = numpy.argmax(Fyy[4:len(Fyy)//2])+4
-        guess_freq = abs(ff[guess_index]+4)   # excluding the zero frequency "peak", which is related to offset
+        guess_index = numpy.argmax(Fyy[2:len(Fyy)//2])+2
+        guess_freq = abs(ff[guess_index]+2)   # excluding the zero frequency "peak", which is related to offset
         print(guess_index)
         guess_amp = numpy.std(yy) * 2.**0.5
         guess_offset = numpy.mean(yy)
