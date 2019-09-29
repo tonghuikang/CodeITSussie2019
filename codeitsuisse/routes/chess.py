@@ -46,7 +46,7 @@ def message():
         text = text.upper().replace(" ", "").replace("_","")
         text = re.sub(r'\W+', '', text)
 
-        print(text)
+        # print(text)
         if n >= len(text):
             ans = text
         else:
@@ -54,11 +54,11 @@ def message():
             txt = list(text) + [""]*(len(ans) - len(text))
             for i in range(n):
                 k = len(txt[i::n])
-                print(len(ans[i::n]))
-                print(len(txt[i*k:(i+1)*k]))
-                print()
+                # print(len(ans[i::n]))
+                # print(len(txt[i*k:(i+1)*k]))
+                # print()
                 ans[i::n] = txt[i*k:(i+1)*k]
-                print(ans)
+                # print(ans)
         res.append("".join(ans[:len(text)]))
 
     return jsonify(res)
