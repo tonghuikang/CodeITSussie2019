@@ -43,11 +43,11 @@ def prismo(request):
                 if square == 0:
                     pos_index = (i,j)
                     break
-        for i, row in enumerate(goal):
-            for j, square in enumerate(row):
-                if square == 0:
-                    goal_index = (i,j)
-                    break
+        # for i, row in enumerate(goal):
+        #     for j, square in enumerate(row):
+        #         if square == 0:
+        #             goal_index = (i,j)
+        #             break
         directions = [(1,0),(0,1),(-1,0),(0,-1)]
         last_visited = None
         stack = []
@@ -79,14 +79,10 @@ def prismo(request):
                 goal_array = []
                 for x_plus, y_plus in directions:
                     x, y = x_plus + pos_index[0], y_plus + pos_index[1]
-                    if initial[x][y] != goal[x][y]:
-                        initial_array.append((initial[x][y],(x,y)))
-                        goal_array.append((goal[x][y]))
-                # for x_plus, y_plus in directions:
-                #     x, y = x_plus + pos_index[0], y_plus + pos_index[1]
-                #     if value
-                # print('initial_array', initial_array)
-                # print('GOAL ARRAY', goal_array)
+                    if x < x_length and x >= 0 and y < y_length and y >= 0:
+                        if initial[x][y] != goal[x][y]:
+                            initial_array.append((initial[x][y],(x,y)))
+                            goal_array.append((goal[x][y]))
                 for value, location in initial_array:
                     if value in goal_array:
                         print('hihihi',pos_index,last_visited, location)
@@ -97,7 +93,6 @@ def prismo(request):
                         moves.append(addMoves((move_direction)))
                         print('down:',initial)
 
-        # print(initial)
 
     return jsonify({'moves':moves})
 #
