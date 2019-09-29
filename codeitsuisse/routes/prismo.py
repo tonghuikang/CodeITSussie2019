@@ -48,22 +48,57 @@ def prismo(request):
                 if square == 0:
                     goal_index = (i,j)
                     break
-        print(pos_index, goal_index)
         directions = [(1,0),(0,1),(-1,0),(0,-1)]
-        while pos_index != goal_index:
+        last_visited = None
+        stack = []
+        stack.append((pos_index,last_visited))
+
+        while len(stack) > 0 and initial != goal:
             opp_square = goal[pos_index[0]][pos_index[1]]
-            for index, direction in enumerate(directions):
-                x_plus, y_plus = direction
+            pos_index, last_visited = stack.pop(0)
+            for x_plus, y_plus in directions:
                 x, y = x_plus + pos_index[0], y_plus + pos_index[1]
+                if (x,y) == last_visited:
+                    continue
                 if x < x_length and x >= 0 and y < y_length and y >= 0:
                     if initial[x][y] == opp_square:
-                        initial[pos_index[0]][pos_index[1]] = opp_square
-                        initial[x][y] = 0
+                        last_visited = (pos_index[0],pos_index[1])
+                        initial[pos_index[0]][pos_index[1]], initial[x][y] =  initial[x][y],0
                         pos_index = (x,y)
-                        moves.append(addMoves(direction))
+                        stack.append(((x,y),last_visited))
+                        moves.append(addMoves((x_plus,y_plus)))
+                        print(initial)
                         break
+            # for x_plus, y_plus in directions:
+            #     x, y = x_plus + pos_index[0], y_plus + pos_index[1]
+            #     if initial[x][y] != goal[x][y] and goal[x][y] != 0:
+            #         last_visited = (pos_index[0],pos_index[1])
+            #         initial[pos_index[0]][pos_index[1]] = opp_square
+            #         initial[x][y] = 0
+            #         pos_index = (x,y)
+            #         stack.append(((x,y),last_visited))
+            #         moves.append(addMoves((x_plus,y_plus)))
+            # print(initial)
+        # while initial != goal:
+        #     opp_square = goal[pos_index[0]][pos_index[1]]
+        #     print(last_visited, pos_index)
+        #     for index, direction in enumerate(directions):
+        #         x_plus, y_plus = direction
+        #         x, y = x_plus + pos_index[0], y_plus + pos_index[1]
+        #         if (x,y) == last_visited:
+        #             continue
+        #         if x < x_length and x >= 0 and y < y_length and y >= 0:
+        #             if initial[x][y] == opp_square:
+        #                 last_visited = (pos_index[0],pos_index[1])
+        #                 initial[pos_index[0]][pos_index[1]] = opp_square
+        #                 initial[x][y] = 0
+        #                 pos_index = (x,y)
+        #                 moves.append(addMoves(direction))
+        #                 break
+        print(initial)
 
     return jsonify({'moves':moves})
+#
 
 @app.route('/prismo', methods=['POST'])
 def evaluate():
