@@ -4,8 +4,10 @@ import json
 from flask import request, jsonify;
 
 from codeitsuisse import app;
+import time
 
 logger = logging.getLogger(__name__)
+
 
 def chessgame(request):
     chessboard = request.get_json(silent=True)

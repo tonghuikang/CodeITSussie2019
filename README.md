@@ -1,3 +1,72 @@
+
+## Competition outcome
+
+We won 3rd place in Singapore, with a score of 4405.
+
+![leaderboard](assets/leaderboard.png)
+
+This is the trendline of the scores of the top four winning teams. The following graphics are obtained from the competition analytics dashboard.
+
+![scoretrends](assets/scoretrends.svg)
+
+This is the number of submissions that we have made for each question.
+
+![submitted](assets/submitted.svg)
+
+This is probably the submissions that make progress on the leaderboard.
+
+![submissions](assets/submissions.svg)
+
+
+
+## Set up guide
+
+Clone this repo
+```
+git clone https://github.com/tonghuikang/codeITSussie2019
+```
+
+Create a Heroku account and an app with some name `<yourappname>`.
+
+Install Heroku CLI on your computer. There are different instructions for different OSes.
+
+
+Log in to heroku on your terminal
+```
+heroku login
+```
+
+Generate SSH keys
+```
+ssh-keygen -t rsa
+heroku keys:add ~/.ssh/id_rsa.pub
+```
+
+Set up your remote server.
+```
+git remote -v
+git remote add heroku git@heroku.com:<yourappname>.git
+```
+
+Read logs almost live.
+```
+heroku logs --app=huikang-cs --tail
+```
+
+For ease of deployment (there is no need for git discipline here.)
+```
+echo "alias ghjk = 'git add . && git commit -m 'auto' && git push heroku master" >> ./bashrc
+```
+
+To deploy solution (please SAVE your files first).
+
+```
+ghjk
+```
+
+**(Following is the original guide when the sample code was downloaded.)**
+
+
 These instruction are to help you solve a test challenge "Calculate Square". Instruction to this test challenge can be found at https://calculate-square.herokuapp.com/instructions
 
 Step by step
@@ -11,68 +80,10 @@ As per the instruction you have to implement a post endpoint /square
 
 
 
-# Your workflow
+(Additional notes from me.)
 
-After you have edited and saved
+Each team member should use their own server. It is more efficient that no code is being pushed to another member during the competition, because resolving pull conflicts is a headache.
 
-```
-git add <files you have edited and SAVED>
-git commit -m "say something"
-```
+Each team member should also use different email accounts. The free tier only allows one build at a time.
 
-
-
-Push to your Heroku, with:
-
-```
-git push jon master
-```
-or
-```
-git push ryan master
-```
-
-or 
-
-```
-git push huikang master
-```
-
-
-
-# Notes from Hui Kang
-
-(Do not run this unless you know what are you doing)
-
-To set heroku
-
-```
-git remote -v
-git remote rm heroku
-git remote add heroku git@heroku.com:<app created on Heroku>.git
-```
-
-To deploy to heroku
-
-```
-git add <only the files you want to add>
-git commit -m "say something"
-git push heroku master
-```
-
-To create new branch 
-
-```
-git checkout -b <your name>
-git push --set-upstream origin huikang
-```
-
-To commit and push (do not push to master)
-
-```
-git add <only the files you want to add>
-git commit -m "say something"
-```
-
-
-
+We exclusive used Python for this competition, and it seems to be sufficient.
