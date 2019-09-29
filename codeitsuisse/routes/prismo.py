@@ -54,48 +54,50 @@ def prismo(request):
         stack.append((pos_index,last_visited))
 
         while len(stack) > 0 and initial != goal:
-            opp_square = goal[pos_index[0]][pos_index[1]]
             pos_index, last_visited = stack.pop(0)
+            goal_square = goal[pos_index[0]][pos_index[1]]
+            continues = 0
             for x_plus, y_plus in directions:
                 x, y = x_plus + pos_index[0], y_plus + pos_index[1]
                 if (x,y) == last_visited:
                     continue
                 if x < x_length and x >= 0 and y < y_length and y >= 0:
-                    if initial[x][y] == opp_square:
+                    print('goal:', goal[pos_index[0]][pos_index[1]])
+                    print(initial[x][y], goal_square, 'helooooooo', (x,y), pos_index)
+                    if initial[x][y] == goal_square:
+                        print('helooooooo')
                         last_visited = (pos_index[0],pos_index[1])
-                        initial[pos_index[0]][pos_index[1]], initial[x][y] =  initial[x][y],0
+                        initial[pos_index[0]][pos_index[1]], initial[x][y] =  initial[x][y], 0
                         pos_index = (x,y)
                         stack.append(((x,y),last_visited))
                         moves.append(addMoves((x_plus,y_plus)))
-                        print(initial)
+                        print('up:', initial)
+                        continues = 1
                         break
-            # for x_plus, y_plus in directions:
-            #     x, y = x_plus + pos_index[0], y_plus + pos_index[1]
-            #     if initial[x][y] != goal[x][y] and goal[x][y] != 0:
-            #         last_visited = (pos_index[0],pos_index[1])
-            #         initial[pos_index[0]][pos_index[1]] = opp_square
-            #         initial[x][y] = 0
-            #         pos_index = (x,y)
-            #         stack.append(((x,y),last_visited))
-            #         moves.append(addMoves((x_plus,y_plus)))
-            # print(initial)
-        # while initial != goal:
-        #     opp_square = goal[pos_index[0]][pos_index[1]]
-        #     print(last_visited, pos_index)
-        #     for index, direction in enumerate(directions):
-        #         x_plus, y_plus = direction
-        #         x, y = x_plus + pos_index[0], y_plus + pos_index[1]
-        #         if (x,y) == last_visited:
-        #             continue
-        #         if x < x_length and x >= 0 and y < y_length and y >= 0:
-        #             if initial[x][y] == opp_square:
-        #                 last_visited = (pos_index[0],pos_index[1])
-        #                 initial[pos_index[0]][pos_index[1]] = opp_square
-        #                 initial[x][y] = 0
-        #                 pos_index = (x,y)
-        #                 moves.append(addMoves(direction))
-        #                 break
-        print(initial)
+            if continues == 0:
+                initial_array = []
+                goal_array = []
+                for x_plus, y_plus in directions:
+                    x, y = x_plus + pos_index[0], y_plus + pos_index[1]
+                    if initial[x][y] != goal[x][y]:
+                        initial_array.append((initial[x][y],(x,y)))
+                        goal_array.append((goal[x][y]))
+                # for x_plus, y_plus in directions:
+                #     x, y = x_plus + pos_index[0], y_plus + pos_index[1]
+                #     if value
+                # print('initial_array', initial_array)
+                # print('GOAL ARRAY', goal_array)
+                for value, location in initial_array:
+                    if value in goal_array:
+                        print('hihihi',pos_index,last_visited, location)
+                        move_direction = (location[0] - pos_index[0], location[1] - pos_index[1])
+                        initial[pos_index[0]][pos_index[1]], initial[location[0]][location[1]] = initial[location[0]][location[1]], initial[pos_index[0]][pos_index[1]]
+                        # last_visited, pos_index = pos_index, location
+                        stack.append((location, pos_index))
+                        moves.append(addMoves((move_direction)))
+                        print('down:',initial)
+
+        # print(initial)
 
     return jsonify({'moves':moves})
 #
