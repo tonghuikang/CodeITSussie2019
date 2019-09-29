@@ -143,8 +143,8 @@ def fit_sin_base3(tt, yy):
     guess_amp = numpy.std(yy) * 2.**0.5
     guess_offset = numpy.mean(yy)
     guess = numpy.array([guess_amp, 2.*numpy.pi*guess_freq, np.random.randn(),
-                         np.random.randn(), 2.*numpy.pi*guess_freq, -0.01,
-                         np.random.randn(), 2.*numpy.pi*guess_freq, +0.01,
+                         np.random.randn(), 2.*numpy.pi*guess_freq*np.random.uniform(), -0.01,
+                         np.random.randn(), 2.*numpy.pi*guess_freq*2*np.random.uniform(), +0.01,
                         numpy.mean(yy[:len(yy)//2]) - numpy.mean(yy[len(yy)//2:]) / (len(yy)//2), 
                         guess_offset])
 
