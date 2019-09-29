@@ -25,8 +25,8 @@ def technical_analysis():
                 candidates.append(optimise_case(ar, casenum = i))
             except Exception as e: 
                 print(e)
-            if candidates != [] and candidates[-1]["loss"] < 20:
-                break
+            # if candidates != [] and candidates[-1]["loss"] < 20:
+            #     break
         if len(candidates) == 0:
             result.append([100,1099])
         else:
@@ -194,10 +194,10 @@ def fit_sin_base4(tt, yy):
     guess_amp = numpy.std(yy) * 2.**0.5
     guess_offset = numpy.mean(yy)
     guess = numpy.array([guess_amp, 2.*numpy.pi*guess_freq, np.random.randn(),
-                         np.random.randn(), 2.*numpy.pi*guess_freq*np.random.uniform(), -0.01,
-                         np.random.randn(), 2.*numpy.pi*guess_freq*2*np.random.uniform(), +0.01,
-                         np.random.randn(), 2.*numpy.pi*guess_freq*0.5*np.random.uniform(), np.random.uniform(),
-                        numpy.mean(yy[:len(yy)//2]) - numpy.mean(yy[len(yy)//2:]) / (len(yy)//2), 
+                         np.random.randn(), 2.*numpy.pi*(0.1)*np.random.uniform(), np.random.uniform(),
+                         np.random.randn(), 2.*numpy.pi*(0.05)*np.random.uniform(), np.random.uniform(),
+                         np.random.randn(), 2.*numpy.pi*(0.08)*np.random.uniform(), np.random.uniform(),
+                        np.random.uniform() + (numpy.mean(yy[:len(yy)//2]) - numpy.mean(yy[len(yy)//2:])) / (len(yy)//2), 
                         guess_offset])
 
     def sinfunc(t, 
