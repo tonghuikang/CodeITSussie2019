@@ -17,6 +17,7 @@ def technical_analysis():
     logging.info("data sent for evaluation {}".format(data))
 
     result = []
+    losses = []
     for i,ar in enumerate(data):
         candidates = []
         for _ in range(100):
@@ -31,6 +32,8 @@ def technical_analysis():
             indice = np.argmin([c["loss"] for c in candidates])
             result.append(candidates[indice]["ans"])
             print(candidates[indice]["loss"])
+            losses.append(candidates[indice]["loss"])
+        print(losses)
 
     return jsonify(result)
 
@@ -176,11 +179,16 @@ def optimise_case(arr_in, casenum = 1):
     yy = arr_in
     tt = range(len(yy))
 
+    randnum = np.random.randn()
 
-    if casenum == 1:
+    if casenum == 0:
         res = fit_sin_base(tt,yy)
+    if casenum == 1:
+        if randnum > 0:
+            res = fit_sin_base(tt,yy)
+        else:
+            res = fit_sin_base2(tt,yy) 
     else:
-        randnum = np.random.randn()
         if randnum < 0.2:
             res = fit_sin_base(tt,yy)
         elif randnum < 0.2:
