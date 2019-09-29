@@ -36,7 +36,7 @@ import re
 @app.route('/secretmessage', methods=['POST'])
 def message():
     data = request.get_json()
-    # logging.info("data sent for evaluation {}".format(data))
+    logging.info("data sent for evaluation {}".format(data))
     # branch = data["branch_officers_timings"]
 
     res = []
