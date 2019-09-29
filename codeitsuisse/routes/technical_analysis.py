@@ -25,6 +25,8 @@ def technical_analysis():
                 candidates.append(optimise_case(ar, casenum = i))
             except Exception as e: 
                 print(e)
+            if candidates != [] and candidates[-1]["loss"] < 30:
+                break
         if len(candidates) == 0:
             result.append([100,1099])
         else:
