@@ -20,7 +20,7 @@ def technical_analysis():
     losses = []
     for i,ar in enumerate(data):
         candidates = []
-        for _ in range(80):
+        for _ in range(50):
             try:
                 candidates.append(optimise_case(ar, casenum = i))
             except Exception as e: 
