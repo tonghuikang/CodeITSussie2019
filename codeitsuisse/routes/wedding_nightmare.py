@@ -76,6 +76,25 @@ def nightmare(request):
                 allocated_ppl.add(friend1)
                 allocated_ppl.add(friend2)
 
+        for friend1, friend2 in families:
+            add = False
+            for table in disjoint_sets:
+                if friend1 in table:
+                    table.add(friend2)
+                    allocated_ppl.add(friend2)
+                    add = True
+                    break
+                if friend2 in table:
+                    table.add(friend1)
+                    allocated_ppl.add(friend1)
+                    add = True
+                    break
+            if add is False:
+                disjoint_sets[0].add(friend1)
+                disjoint_sets[0].add(friend2)
+                allocated_ppl.add(friend1)
+                allocated_ppl.add(friend2)
+
         guestlist = set([i for i in range(1,guests+1)])
         remaining = guestlist.difference(allocated_ppl)
 
