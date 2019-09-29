@@ -48,6 +48,7 @@ def prismo(request):
                 if square == 0:
                     goal_index = (i,j)
                     break
+        print(pos_index, goal_index)
         directions = [(1,0),(0,1),(-1,0),(0,-1)]
         while pos_index != goal_index:
             opp_square = goal[pos_index[0]][pos_index[1]]
@@ -56,10 +57,12 @@ def prismo(request):
                 x, y = x_plus + pos_index[0], y_plus + pos_index[1]
                 if x < x_length and x >= 0 and y < y_length and y >= 0:
                     if initial[x][y] == opp_square:
+                        initial[pos_index[0]][pos_index[1]] = opp_square
                         initial[x][y] = 0
                         pos_index = (x,y)
                         moves.append(addMoves(direction))
                         break
+
     return jsonify({'moves':moves})
 
 @app.route('/prismo', methods=['POST'])
