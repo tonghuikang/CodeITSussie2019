@@ -64,7 +64,24 @@ To deploy solution (please SAVE your files first).
 ghjk
 ```
 
-**(Following is the original guide when the sample code was downloaded.)**
+## Additional notes
+
+Each team member should use their own server. It is more efficient that no code is being pushed to another member during the competition, because resolving pull conflicts is a headache.
+
+Each team member should also use different email accounts. The free tier only allows one build at a time.
+
+We exclusive used Python for this competition, and it seems to be sufficient.
+
+
+## Tips
+
+Use Postman (app) to check if your API is working.
+
+If you want to catch API requests, you can set up one at requestbin.com.
+
+
+## Original Guide
+Following is the original guide when the sample code was downloaded.
 
 
 These instruction are to help you solve a test challenge "Calculate Square". Instruction to this test challenge can be found at https://calculate-square.herokuapp.com/instructions
@@ -77,13 +94,3 @@ As per the instruction you have to implement a post endpoint /square
 - write your implementation in this method. This method will be the entry point when you submit your solution for evaluation
 - Note the __init__.py file in each folder. This file makes python treat directories containing it to be loaded in a module
 - Follow similar approach to implement actual challenges during the event
-
-
-
-(Additional notes from me.)
-
-Each team member should use their own server. It is more efficient that no code is being pushed to another member during the competition, because resolving pull conflicts is a headache.
-
-Each team member should also use different email accounts. The free tier only allows one build at a time.
-
-We exclusive used Python for this competition, and it seems to be sufficient.
